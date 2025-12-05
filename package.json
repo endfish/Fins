@@ -1,5 +1,6 @@
 {
   "name": "fins",
+  "description": "A clean, minimalist new tab extension. Built with Vue 3, Vite, TypeScript, and co-crafted by Gemini.",
   "private": true,
   "version": "0.0.0",
   "type": "module",

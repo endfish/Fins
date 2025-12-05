@@ -2,11 +2,12 @@
   "manifest_version": 3,
   "name": "Fins - Geek New Tab",
   "version": "0.0.1",
-  "description": "A clean, geek-style new tab extension for efficiency.",
+  "description": "A clean, minimalist new tab extension. Built with Vue 3, Vite, TypeScript, and co-crafted by Gemini.",
   "icons": {
-    "16": "public/vite.svg",
-    "48": "public/vite.svg",
-    "128": "public/vite.svg"
+    "16": "public/logo.png",
+    "32": "public/logo.png",
+    "48": "public/logo.png",
+    "128": "public/logo.png"
   },
   "action": {
     "default_title": "Fins"

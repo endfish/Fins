@@ -87,7 +87,7 @@
       inset: 0;
       z-index: 0;
       backdrop-filter: blur(2px);
-      // filter: url(#glass-distortion); // 应用 SVG 滤镜
+      filter: url(#glass-distortion); // 应用 SVG 滤镜
       opacity: 0.8;
     }
 

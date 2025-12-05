@@ -1,12 +1,11 @@
 # Fins - Geek New Tab
 
 <p align="center">
-  <img src="public/vite.svg" width="100" height="100" alt="Fins Logo">
+  <img src="public/logo.svg" width="100" height="100" alt="Fins Logo">
 </p>
 
 <p align="center">
-  <b>A clean, geek-style new tab extension designed for efficiency.</b><br>
-  Built with Vue 3, Vite, TypeScript, and ❤️.
+  A clean, minimalist new tab extension. Built with Vue 3, Vite, TypeScript, and co-crafted by Gemini.
 </p>
 
 ---

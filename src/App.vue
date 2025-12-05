@@ -1,6 +1,6 @@
 <template>
   <div class="fins-app">
-    <!-- <svg style="display: none; width: 0; height: 0">
+    <svg style="display: none; width: 0; height: 0">
       <filter id="glass-distortion" x="0%" y="0%" width="100%" height="100%" filterUnits="objectBoundingBox">
         <feTurbulence type="fractalNoise" baseFrequency="0.001 0.005" numOctaves="1" seed="17" result="turbulence" />
         <feComponentTransfer in="turbulence" result="mapped">
@@ -15,7 +15,7 @@
         <feComposite in="specLight" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" result="litImage" />
         <feDisplacementMap in="SourceGraphic" in2="softMap" scale="50" xChannelSelector="R" yChannelSelector="G" />
       </filter>
-    </svg> -->
+    </svg>
 
     <ToastContainer />
     <ConfirmModal />

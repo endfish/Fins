@@ -1,12 +1,12 @@
 <template>
   <div class="tab-pane about-pane">
-    <img src="@/assets/vue.svg" class="logo" />
+    <img src="/logo.svg" class="logo" />
     <h2>Fins</h2>
     <p class="version">v0.0.1 Beta</p>
 
     <div class="desc-box">
-      A clean, geek-style new tab extension designed for efficiency and aesthetics.<br />
-      Built with Vue 3, Vite, and ❤️.
+      <b>A clean, minimalist new tab extension.</b><br>
+      Built with Vue 3, Vite, TypeScript, and co-crafted by Gemini.
     </div>
 
     <div class="poetry">“ Code is Poetry ”</div>
