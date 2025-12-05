@@ -99,7 +99,7 @@
     const target = event.target as HTMLInputElement
     if (target.files && target.files.length > 0) {
       const file = target.files[0]
-      store.importData(file)
+      if (file) store.importData(file)
       // 清空 value 允许重复选择同一文件
       target.value = ''
     }

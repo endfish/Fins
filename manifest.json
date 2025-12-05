@@ -23,7 +23,6 @@
     "https://www.bing.com/"
   ],
   "background": {
-    "service_worker": "src/utils/background.ts",
     "type": "module"
   }
 }

@@ -17,7 +17,7 @@ export interface GridItem {
   id: string
   groupId: string
   type: string // 组件类型，例如 'link-card', 'clock-card'
-  size: '1x1' | '2x1' | '2x2' | '4x2' // 尺寸定义
+  size: '1x1' | '2x1' | '2x2' | '3x2' | '4x2' // 尺寸定义
   // 核心：泛型属性，存放具体组件的数据 (如 url, name, timezone 等)
   props: Record<string, any>
 }
@@ -117,13 +117,14 @@ export const useGridStore = defineStore('grid', () => {
   const updateItem = (id: string, updates: Partial<GridItem>) => {
     const idx = items.value.findIndex((i) => i.id === id)
     if (idx !== -1) {
-      // 深度合并 props，防止覆盖未传的属性
       const oldItem = items.value[idx]
+      const newProps = updates.props || {}
+      
       items.value[idx] = {
         ...oldItem,
         ...updates,
-        props: { ...oldItem.props, ...(updates.props || {}) },
-      }
+        props: { ...oldItem?.props, ...newProps },
+      } as GridItem 
     }
   }
 

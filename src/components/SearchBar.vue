@@ -2,7 +2,7 @@
   <div class="search-container" :class="{ 'is-focused': isFocused }">
     <div class="glass-shell">
       <button class="engine-switch" @click="toggleEngine" @contextmenu.prevent="openEngineSettings" title="Left-click: Switch | Right-click: Settings">
-        <i :class="currentEngine.icon"></i>
+        <i :class="currentEngine?.icon"></i>
       </button>
 
       <input
@@ -11,7 +11,7 @@
         @focus="isFocused = true"
         @blur="isFocused = false"
         @keydown.enter="handleSearch"
-        :placeholder="`Search with ${currentEngine.name}...`"
+        :placeholder="`Search with ${currentEngine?.name}...`"
         class="search-input" />
 
       <button class="search-btn" @click="handleSearch">
@@ -57,7 +57,7 @@
 
   const handleSearch = () => {
     if (!searchText.value.trim()) return
-    const url = currentEngine.value.url + encodeURIComponent(searchText.value)
+    const url = currentEngine.value?.url + encodeURIComponent(searchText.value)
 
     // 使用 location.href 在当前页打开 (符合 NewTab 习惯)
     window.location.href = url

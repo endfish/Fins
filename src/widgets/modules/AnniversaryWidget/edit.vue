@@ -95,7 +95,7 @@
           // 默认值
           formData.value = {
             title: 'My Day',
-            date: new Date().toISOString().split('T')[0],
+            date: new Date().toISOString().split('T')[0] ?? '',
             bgUrl: '',
             bgColor: 'rgba(0,0,0,0.5)',
             size: '3x2',
@@ -108,7 +108,7 @@
 
   const handleSave = () => {
     if (!formData.value.title) formData.value.title = 'Anniversary'
-    if (!formData.value.date) formData.value.date = new Date().toISOString().split('T')[0]
+    if (!formData.value.date) formData.value.date = new Date().toISOString().split('T')[0] ?? ''
     emit('save', formData.value)
   }
 </script>

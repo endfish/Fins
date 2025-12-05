@@ -3,7 +3,7 @@
  */
 export const storage = {
   // 获取数据 (优先从 area 读取，默认为 local)
-  get: (keys: string | string[] | Object | null, area: 'local' | 'sync' = 'local') => {
+  get: (keys: string | string[] | Record<string, any> | null, area: 'local' | 'sync' = 'local') => {
     return new Promise<any>((resolve) => {
       chrome.storage[area].get(keys, (result) => {
         resolve(result)
@@ -12,7 +12,7 @@ export const storage = {
   },
 
   // 保存数据
-  set: (items: Object, area: 'local' | 'sync' = 'local') => {
+  set: (items: Record<string, any>, area: 'local' | 'sync' = 'local') => {
     return new Promise<void>((resolve) => {
       chrome.storage[area].set(items, () => {
         // 检查错误（例如配额超限）

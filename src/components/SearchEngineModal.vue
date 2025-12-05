@@ -53,7 +53,10 @@
   import { useSettingStore, type SearchEngine } from '@/store/useSettingStore'
   import IconSelector from './IconSelector.vue'
 
-  const props = defineProps<{ visible: boolean }>()
+  defineProps<{
+    visible: boolean
+  }>()
+
   const emit = defineEmits(['close'])
   const store = useSettingStore()
 

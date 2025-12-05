@@ -53,7 +53,7 @@
     showModal.value = false
   }
 
-  const handleContextMenu = async (e: MouseEvent, group: Group) => {
+  const handleContextMenu = async (_e: MouseEvent, group: Group) => {
     if (group.isDefault) return
 
     const ok = await confirmStore.show({

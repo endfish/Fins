@@ -2,7 +2,7 @@
   <div class="smart-grid-container">
     <draggable v-model="draggableItems" item-key="id" :animation="300" ghost-class="ghost-widget" class="grid-layout" handle=".widget-shell">
       <template #item="{ element: item }">
-        <component :is="getWidgetComponent(item.type).view" :item="item" @contextmenu="openItemContextMenu($event, item)" :class="`grid-item span-${item.size}`" />
+        <component :is="getWidgetComponent(item.type)?.view" :item="item" @contextmenu="openItemContextMenu($event, item)" :class="`grid-item span-${item.size}`" />
       </template>
 
       <template #footer>
@@ -160,7 +160,7 @@
     const { size, ...widgetProps } = formData
 
     // 如果是新增，必须有个尺寸；如果是编辑，formData 里没 size 就不更新
-    const newSize = size || def.defaultSize
+    const newSize = size || def?.defaultSize
 
     if (currentEditSession.targetId) {
       // Update
@@ -230,13 +230,13 @@
   }
 
   // 场景 B: 右键点击了背景
-  const handleBackgroundContextMenu = (e: MouseEvent) => {
-    menuState.x = e.clientX
-    menuState.y = e.clientY
-    // [!code ++] 关键：targetItem 设为 null，ContextMenu 组件会据此判断显示 "Add" 菜单
-    menuState.targetItem = null
-    menuState.visible = true
-  }
+  // const handleBackgroundContextMenu = (e: MouseEvent) => {
+  //   menuState.x = e.clientX
+  //   menuState.y = e.clientY
+  //   // [!code ++] 关键：targetItem 设为 null，ContextMenu 组件会据此判断显示 "Add" 菜单
+  //   menuState.targetItem = null
+  //   menuState.visible = true
+  // }
 
   const closeContextMenu = () => {
     menuState.visible = false

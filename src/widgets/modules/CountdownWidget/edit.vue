@@ -85,7 +85,7 @@
         } else {
           formData.value = {
             title: 'Event',
-            date: new Date().toISOString().split('T')[0],
+            date: new Date().toISOString().split('T')[0] ?? '',
             recurrence: 'none',
             bgUrl: '',
             bgColor: 'rgba(74, 144, 226, 0.6)',
@@ -98,7 +98,7 @@
 
   const handleSave = () => {
     if (!formData.value.title) formData.value.title = 'Countdown'
-    if (!formData.value.date) formData.value.date = new Date().toISOString().split('T')[0]
+    if (!formData.value.date) formData.value.date = new Date().toISOString().split('T')[0] ?? ''
     emit('save', formData.value)
   }
 </script>

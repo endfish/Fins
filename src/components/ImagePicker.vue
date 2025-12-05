@@ -67,7 +67,7 @@
   useInfiniteScroll(
     scrollEl,
     () => {
-      if (displayWallpapers.value.length < localWallpapers.value.length) {
+      if (displayWallpapers.value.length < localWallpapers.length) {
         currentPage.value++
       }
     },

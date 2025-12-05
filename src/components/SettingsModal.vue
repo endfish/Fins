@@ -32,7 +32,10 @@
   import SyncTab from './settings/SyncTab.vue'
   import AboutTab from './settings/AboutTab.vue'
 
-  const props = defineProps<{ visible: boolean }>()
+  defineProps<{
+    visible: boolean
+  }>()
+
   const emit = defineEmits(['close'])
 
   const currentTab = ref('general')

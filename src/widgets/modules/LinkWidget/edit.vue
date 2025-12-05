@@ -122,8 +122,10 @@
         let domain = formData.value.url
         if (!domain.startsWith('http')) domain = 'https://' + domain
         const hostname = new URL(domain).hostname
-        const name = hostname.replace('www.', '').split('.')[0]
-        formData.value.name = name.charAt(0).toUpperCase() + name.slice(1)
+        const namePart = hostname.replace('www.', '').split('.')[0] || ''
+        if (namePart) {
+          formData.value.name = namePart.charAt(0).toUpperCase() + namePart.slice(1)
+        }
       } catch (e) {
         // ignore
       }

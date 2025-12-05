@@ -39,7 +39,7 @@
 1.  **Clone the repo**
 
     ```bash
-    git clone [https://github.com/endfish/fins.git](https://github.com/endfish/fins.git)
+    git clone https://github.com/endfish/fins.git
     cd fins
     ```
 

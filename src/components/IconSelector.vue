@@ -33,18 +33,18 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, computed, watch, nextTick } from 'vue'
+  import { ref, computed, watch } from 'vue'
   import { useInfiniteScroll } from '@vueuse/core'
 
   // 导入刚才生成的全量图标数据
   // 如果报错 "Cannot find module"，请确保你运行了 node scripts/gen-icons.js
   import allIconsData from '@/assets/icons.json'
 
-  const props = defineProps<{
+  const emit = defineEmits(['update:modelValue'])
+
+  defineProps<{
     modelValue: string
   }>()
-
-  const emit = defineEmits(['update:modelValue'])
 
   // --- 状态 ---
   const searchQuery = ref('')
