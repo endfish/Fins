@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Fins - Geek New Tab",
+  "version": "0.0.1",
+  "description": "A clean, geek-style new tab extension for efficiency.",
+  "icons": {
+    "16": "public/vite.svg",
+    "48": "public/vite.svg",
+    "128": "public/vite.svg"
+  },
+  "action": {
+    "default_title": "Fins"
+  },
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  },
+  "permissions": [
+    "storage",
+    "unlimitedStorage"
+  ],
+  "host_permissions": [
+    "https://www.bing.com/"
+  ],
+  "background": {
+    "service_worker": "src/utils/background.ts",
+    "type": "module"
+  }
+}
