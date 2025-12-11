@@ -1,0 +1,19 @@
+{
+  "appName": {
+    "message": "Fins - Geek New Tab",
+    "description": "Extension name"
+  },
+  "appDesc": {
+    "message": "A clean, minimalist new tab extension.",
+    "description": "Extension description"
+  },
+  "settingTitle": {
+    "message": "Settings"
+  },
+  "general": {
+    "message": "General"
+  },
+  "save": {
+    "message": "Save"
+  }
+}

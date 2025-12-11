@@ -3,22 +3,33 @@
     <div class="toolbar">
       <div class="search-box">
         <i class="ri-search-line search-icon"></i>
-        <input v-model="searchQuery" placeholder="Search 2000+ icons..." class="search-input" autofocus />
+        <input v-model="searchQuery" placeholder="Search icons & brands..." class="search-input" autofocus />
         <i v-if="searchQuery" class="ri-close-line clear-icon" @click="searchQuery = ''"></i>
       </div>
 
       <div class="filter-tabs">
-        <div v-for="type in ['all', 'line', 'fill']" :key="type" class="tab" :class="{ active: filterType === type }" @click="filterType = type as any" :title="type.toUpperCase()">
+        <div
+          v-for="type in ['all', 'line', 'fill', 'brands']"
+          :key="type"
+          class="tab"
+          :class="{ active: filterType === type }"
+          @click="filterType = type as any"
+          :title="type.toUpperCase()">
           <i v-if="type === 'all'" class="ri-apps-line"></i>
           <i v-else-if="type === 'line'" class="ri-checkbox-blank-circle-line"></i>
-          <i v-else class="ri-checkbox-blank-circle-fill"></i>
+          <i v-else-if="type === 'fill'" class="ri-checkbox-blank-circle-fill"></i>
+          <i v-else class="ri-google-play-line"></i>
         </div>
       </div>
     </div>
 
     <div class="icon-grid custom-scrollbar" ref="scrollEl">
-      <div v-for="icon in displayIcons" :key="icon" class="icon-item" :class="{ active: modelValue === icon }" @click="selectIcon(icon)" :title="icon">
-        <i :class="icon"></i>
+      <div v-for="icon in displayIcons" :key="getIconKey(icon)" class="icon-item" :class="{ active: isSelected(icon) }" @click="selectIcon(icon)" :title="getIconName(icon)">
+        <i v-if="typeof icon === 'string'" :class="icon"></i>
+
+        <svg v-else viewBox="0 0 24 24" class="brand-svg">
+          <path :d="icon.p" />
+        </svg>
       </div>
 
       <div class="status-bar">
@@ -36,66 +47,90 @@
   import { ref, computed, watch } from 'vue'
   import { useInfiniteScroll } from '@vueuse/core'
 
-  // 导入刚才生成的全量图标数据
-  // 如果报错 "Cannot find module"，请确保你运行了 node scripts/gen-icons.js
-  import allIconsData from '@/assets/icons.json'
+  import remixIconsData from '@/assets/icons.json'
+  import brandIconsData from '@/assets/brands.json' // 导入生成的 JSON
 
-  const emit = defineEmits(['update:modelValue'])
-
-  defineProps<{
+  const props = defineProps<{
     modelValue: string
   }>()
 
+  const emit = defineEmits(['update:modelValue', 'select-brand'])
+
+  // 类型定义
+  type BrandIcon = { n: string; s: string; h: string; p: string }
+  type IconItem = string | BrandIcon
+
   // --- 状态 ---
   const searchQuery = ref('')
-  const filterType = ref<'all' | 'line' | 'fill'>('all')
+  const filterType = ref<'all' | 'line' | 'fill' | 'brands'>('all')
   const scrollEl = ref<HTMLElement | null>(null)
 
-  // 分页控制
   const PAGE_SIZE = 100
   const currentPage = ref(1)
 
-  // --- 计算属性：过滤逻辑 (极快) ---
-  const filteredAllIcons = computed(() => {
-    let result = allIconsData as string[]
+  // --- 计算属性 ---
+  const filteredAllIcons = computed<IconItem[]>(() => {
+    const q = searchQuery.value.toLowerCase().trim()
 
-    // 1. 类型过滤
+    // 1. 如果选了 Brands，只返回品牌图标
+    if (filterType.value === 'brands') {
+      let res = brandIconsData as BrandIcon[]
+      if (q) res = res.filter((i) => i.n.toLowerCase().includes(q) || i.s.includes(q))
+      return res
+    }
+
+    // 2. 否则处理 Remix Icons
+    let res = remixIconsData as string[]
+    // 混合模式下，不显示品牌图标，因为数量太多(3000+)，会淹没系统图标
+    // 如果用户明确搜了内容，也许可以混合？暂时保持分离以保持干净。
+
     if (filterType.value === 'line') {
-      result = result.filter((i) => i.endsWith('-line'))
+      res = res.filter((i) => i.endsWith('-line'))
     } else if (filterType.value === 'fill') {
-      result = result.filter((i) => i.endsWith('-fill'))
+      res = res.filter((i) => i.endsWith('-fill'))
     }
 
-    // 2. 搜索关键词过滤
-    if (searchQuery.value) {
-      const q = searchQuery.value.toLowerCase().trim()
-      result = result.filter((i) => i.includes(q))
+    if (q) {
+      res = res.filter((i) => i.includes(q))
     }
 
-    return result
+    return res
   })
 
-  // 总数
   const filteredTotal = computed(() => filteredAllIcons.value.length)
 
-  // --- 计算属性：当前显示的部分 (Pagination) ---
   const displayIcons = computed(() => {
     return filteredAllIcons.value.slice(0, currentPage.value * PAGE_SIZE)
   })
 
-  // --- 动作 ---
+  // --- 辅助函数 ---
+  const getIconKey = (icon: IconItem) => (typeof icon === 'string' ? icon : icon.s)
+  const getIconName = (icon: IconItem) => (typeof icon === 'string' ? icon : icon.n)
 
-  const selectIcon = (icon: string) => {
-    emit('update:modelValue', icon)
+  const isSelected = (icon: IconItem) => {
+    if (typeof icon === 'string') return props.modelValue === icon
+    // 品牌图标选中逻辑：比如 modelValue 是 "si:github"
+    return props.modelValue === `si:${icon.s}`
   }
 
-  // 加载更多
+  // --- 动作 ---
+  const selectIcon = (icon: IconItem) => {
+    if (typeof icon === 'string') {
+      emit('update:modelValue', icon)
+    } else {
+      // 核心：品牌图标使用 "si:" 前缀
+      const val = `si:${icon.s}`
+      emit('update:modelValue', val)
+      // 额外发射一个事件，把颜色传出去（用于 LinkWidget 自动填色）
+      emit('select-brand', { color: icon.h })
+    }
+  }
+
   const loadMore = () => {
     if (displayIcons.value.length >= filteredTotal.value) return
     currentPage.value++
   }
 
-  // 使用 VueUse 的无限滚动
   useInfiniteScroll(
     scrollEl,
     () => {
@@ -104,16 +139,14 @@
     { distance: 50 }
   )
 
-  // 当搜索或筛选变化时，重置分页并滚动到顶部
   watch([searchQuery, filterType], () => {
     currentPage.value = 1
-    if (scrollEl.value) {
-      scrollEl.value.scrollTop = 0
-    }
+    if (scrollEl.value) scrollEl.value.scrollTop = 0
   })
 </script>
 
 <style lang="less" scoped>
+  /* 复用原有样式，增加 svg 样式 */
   .icon-selector {
     border: 1px solid rgba(255, 255, 255, 0.1);
     background: rgba(0, 0, 0, 0.2);
@@ -127,11 +160,9 @@
     .toolbar {
       display: flex;
       gap: 10px;
-
       .search-box {
         flex: 1;
         position: relative;
-
         .search-icon {
           position: absolute;
           left: 10px;
@@ -140,7 +171,6 @@
           color: rgba(255, 255, 255, 0.4);
           pointer-events: none;
         }
-
         .clear-icon {
           position: absolute;
           right: 10px;
@@ -152,32 +182,28 @@
             color: #fff;
           }
         }
-
         .search-input {
           width: 100%;
           background: rgba(255, 255, 255, 0.05);
           border: 1px solid rgba(255, 255, 255, 0.1);
           border-radius: 8px;
-          padding: 8px 30px 8px 32px; // 留出左右图标位置
+          padding: 8px 30px 8px 32px;
           color: #fff;
           font-size: 13px;
           outline: none;
           box-sizing: border-box;
-
           &:focus {
             border-color: rgba(255, 255, 255, 0.3);
             background: rgba(255, 255, 255, 0.1);
           }
         }
       }
-
       .filter-tabs {
         display: flex;
         background: rgba(255, 255, 255, 0.05);
         border-radius: 8px;
         padding: 2px;
         border: 1px solid rgba(255, 255, 255, 0.1);
-
         .tab {
           width: 28px;
           height: 28px;
@@ -188,12 +214,10 @@
           color: rgba(255, 255, 255, 0.4);
           border-radius: 6px;
           transition: all 0.2s;
-
           &:hover {
             color: #fff;
             background: rgba(255, 255, 255, 0.05);
           }
-
           &.active {
             color: #000;
             background: #fff;
@@ -207,10 +231,9 @@
       display: grid;
       grid-template-columns: repeat(6, 1fr);
       gap: 8px;
-      max-height: 240px; // 稍微加高一点，视野更好
+      max-height: 240px;
       overflow-y: auto;
       padding-right: 4px;
-      // 保持内容的最小高度，防止搜索无结果时塌陷太难看
       min-height: 100px;
 
       .icon-item {
@@ -225,19 +248,29 @@
         transition: all 0.2s;
         background: rgba(255, 255, 255, 0.02);
 
+        .brand-svg {
+          width: 20px;
+          height: 20px;
+          transition: fill 0.2s;
+          fill: #FFF;
+          // fill 颜色由行内样式控制 (icon.hex)
+        }
+
         &:hover {
           background: rgba(255, 255, 255, 0.15);
           color: #fff;
           transform: scale(1.15);
           z-index: 1;
         }
-
         &.active {
           background: #fff;
           color: #000;
           box-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
           transform: scale(1.1);
           z-index: 2;
+          .brand-svg {
+            fill: #000 !important; // 选中时强制变黑
+          }
         }
       }
 
@@ -247,7 +280,6 @@
         padding: 10px;
         color: rgba(255, 255, 255, 0.3);
         font-size: 12px;
-
         .spin {
           animation: spin 1s linear infinite;
           font-size: 16px;
@@ -265,7 +297,7 @@
       transform: rotate(360deg);
     }
   }
-
+  // 滚动条样式保持不变
   .custom-scrollbar::-webkit-scrollbar {
     width: 4px;
   }

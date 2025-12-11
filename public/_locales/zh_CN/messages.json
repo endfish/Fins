@@ -1,0 +1,17 @@
+{
+  "appName": {
+    "message": "Fins - 新标签页"
+  },
+  "appDesc": {
+    "message": "一款极简、干净的新标签页扩展。"
+  },
+  "settingTitle": {
+    "message": "设置"
+  },
+  "general": {
+    "message": "通用"
+  },
+  "save": {
+    "message": "保存"
+  }
+}

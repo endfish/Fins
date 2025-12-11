@@ -89,7 +89,7 @@
   const defaultData: WidgetFormData = {
     url: '',
     name: '',
-    iconType: 'api',
+    iconType: 'remix',
     iconValue: '',
     bgColor: 'rgba(255,255,255,0.1)',
   }

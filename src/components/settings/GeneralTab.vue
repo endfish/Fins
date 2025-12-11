@@ -28,6 +28,7 @@
 <script setup lang="ts">
   import { useSettingStore } from '@/store/useSettingStore'
   const store = useSettingStore()
+
 </script>
 
 <style lang="less" scoped>
@@ -66,6 +67,10 @@
       border-color: rgba(255, 255, 255, 0.3);
       background: rgba(255, 255, 255, 0.08);
     }
+  }
+
+  .styled-select {
+    width: 100%;
   }
 
   .divider {

@@ -4,7 +4,10 @@
       <div class="link-content" :style="{ backgroundColor: bgColor }">
         <div class="icon-layer">
           <img v-if="props.iconType === 'api'" :src="apiIconUrl" class="icon-img" loading="lazy" />
-          <i v-else-if="props.iconType === 'remix'" :class="props.iconValue" class="icon-font"></i>
+          <i v-else-if="props.iconType === 'remix' && !isBrandIcon" :class="props.iconValue" class="icon-font"></i>
+          <svg v-else-if="isBrandIcon && brandPath" viewBox="0 0 24 24" class="icon-svg">
+            <path :d="brandPath" />
+          </svg>
           <span v-else class="icon-text">{{ (props.iconValue || '').slice(0, 2).toUpperCase() }}</span>
         </div>
       </div>
@@ -18,6 +21,7 @@
   import { computed } from 'vue'
   import WidgetShell from '@/widgets/base/WidgetShell.vue'
   import type { GridItem } from '@/store/useGridStore'
+  import brandIconsData from '@/assets/brands.json'
 
   const { item } = defineProps<{
     item: GridItem
@@ -25,6 +29,19 @@
 
   const props = computed(() => item.props || {})
   const bgColor = computed(() => props.value.bgColor || 'rgba(255,255,255,0.1)')
+
+  // 核心判断
+  const isBrandIcon = computed(() => {
+    return props.value.iconValue && props.value.iconValue.startsWith('si:')
+  })
+
+  // 查找路径
+  const brandPath = computed(() => {
+    if (!isBrandIcon.value) return ''
+    const slug = props.value.iconValue.replace('si:', '')
+    const icon = (brandIconsData as any[]).find((b) => b.s === slug)
+    return icon ? icon.p : ''
+  })
 
   const apiIconUrl = computed(() => {
     try {
@@ -115,6 +132,13 @@
         letter-spacing: 1px;
       }
     }
+  }
+
+  .icon-svg {
+    width: 36px;
+    height: 36px;
+    fill: #fff; // 默认白色
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
   }
 
   .app-name {
