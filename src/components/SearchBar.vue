@@ -1,7 +1,7 @@
 <template>
   <div class="search-container" :class="{ 'is-focused': isFocused }">
     <div class="glass-shell">
-      <button class="engine-switch" @click="toggleEngine" @contextmenu.prevent="openEngineSettings" title="Left-click: Switch | Right-click: Settings">
+      <button class="engine-switch" @click="toggleEngine" @contextmenu.prevent="openEngineSettings" :title="t('search_switch_tooltip')">
         <i :class="currentEngine?.icon"></i>
       </button>
 
@@ -11,7 +11,7 @@
         @focus="isFocused = true"
         @blur="isFocused = false"
         @keydown.enter="handleSearch"
-        :placeholder="`Search with ${currentEngine?.name}...`"
+        :placeholder="t('search_placeholder', [currentEngine?.name ?? '?'])"
         class="search-input" />
 
       <button class="search-btn" @click="handleSearch">

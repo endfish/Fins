@@ -46,6 +46,30 @@
   "mode_custom": { "message": "自定义链接" },
   "input_custom_bg_placeholder": { "message": "输入图片直链..." },
 
+  "_comment_settings_sync": { "message": "--- 同步设置 ---" },
+  "sync_section_title": { "message": "云端同步" },
+  "sync_status_enabled": { "message": "已开启" },
+  "sync_status_disabled": { "message": "已关闭" },
+  "sync_desc": { "message": "使用 Google/Microsoft 账户跨设备同步数据。<br>已启用 LZ-String 压缩以确保存储效率。" },
+  "sync_quota_label": { "message": "云存储用量" },
+  
+  "sync_section_cloud": { "message": "云端操作" },
+  "sync_btn_upload": { "message": "上传" },
+  "sync_btn_upload_sub": { "message": "本地 ➔ 云端" },
+  "sync_btn_download": { "message": "下载" },
+  "sync_btn_download_sub": { "message": "云端 ➔ 本地" },
+
+  "sync_section_backup": { "message": "文件备份" },
+  "sync_btn_export": { "message": "导出 JSON" },
+  "sync_btn_export_sub": { "message": "保存备份文件" },
+  "sync_btn_import": { "message": "导入 JSON" },
+  "sync_btn_import_sub": { "message": "从文件恢复" },
+
+  "sync_section_danger": { "message": "危险区域" },
+  "sync_clear_title": { "message": "清空云端数据" },
+  "sync_clear_desc": { "message": "永久删除服务器上的所有同步数据。" },
+  "btn_clear": { "message": "清空" },
+
   "_comment_search": { "message": "--- 搜索栏 ---" },
   "search_placeholder": { 
     "message": "使用 $ENGINE$ 搜索...",
@@ -55,6 +79,14 @@
       }
     }
   },
+  "search_switch_tooltip": { "message": "左键：切换引擎 | 右键：设置" },
   "search_engines_title": { "message": "搜索引擎管理" },
-  "btn_add_engine": { "message": "添加引擎" }
+  "label_name": { "message": "名称" },
+  "label_url_prefix": { "message": "URL 前缀" },
+  "label_icon": { "message": "图标" },
+  "placeholder_engine_name": { "message": "例如：Google" },
+  "placeholder_engine_url": { "message": "https://google.com/search?q=" },
+  "tip_engine_query": { "message": "搜索词将自动拼接在末尾。" },
+  "text_selected": { "message": "已选择" },
+  "btn_save_engine": { "message": "保存引擎" }
 }

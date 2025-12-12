@@ -2,9 +2,9 @@
   <div class="modal-overlay" v-if="visible" @click.self="emit('close')">
     <div class="engine-card glass-panel">
       <div class="card-header">
-        <h3>Search Engines</h3>
-        <button class="add-btn" @click="startAdd" v-if="!isEditing"><i class="ri-add-line"></i> Add</button>
-        <button class="back-btn" @click="isEditing = false" v-else><i class="ri-arrow-left-line"></i> Back</button>
+        <h3>{{ t('search_engines_title') }}</h3>
+        <button class="add-btn" @click="startAdd" v-if="!isEditing"><i class="ri-add-line"></i> {{ t('common_add') }}</button>
+        <button class="back-btn" @click="isEditing = false" v-else><i class="ri-arrow-left-line"></i> {{ t('common_back') }}</button>
       </div>
 
       <div class="engine-list custom-scrollbar" v-if="!isEditing">
@@ -24,24 +24,24 @@
 
       <div class="edit-form custom-scrollbar" v-else>
         <div class="form-group">
-          <label>Name</label>
-          <input v-model="formData.name" placeholder="ex: Google" class="styled-input" />
+          <label>{{ t('label_name') }}</label>
+          <input v-model="formData.name" :placeholder="t('placeholder_engine_name')" class="styled-input" />
         </div>
 
         <div class="form-group">
-          <label>URL Prefix</label>
-          <input v-model="formData.url" placeholder="https://google.com/search?q=" class="styled-input" />
-          <p class="tip">Query will be appended to the end.</p>
+          <label>{{ t('label_url_prefix') }}</label>
+          <input v-model="formData.url" :placeholder="t('placeholder_engine_url')" class="styled-input" />
+          <p class="tip">{{ t('tip_engine_query') }}</p>
         </div>
 
         <div class="form-group">
-          <label>Icon</label>
-          <div class="selected-preview" v-if="formData.icon"><i :class="formData.icon"></i> Selected</div>
+          <label>{{ t('label_icon') }}</label>
+          <div class="selected-preview" v-if="formData.icon"><i :class="formData.icon"></i> {{ t('text_selected') }}</div>
           <IconSelector v-model="formData.icon" />
         </div>
 
         <div class="form-footer">
-          <button class="save-btn" @click="handleSave">Save Engine</button>
+          <button class="save-btn" @click="handleSave">{{ t('btn_save_engine') }}</button>
         </div>
       </div>
     </div>
@@ -52,6 +52,7 @@
   import { ref, reactive } from 'vue'
   import { useSettingStore, type SearchEngine } from '@/store/useSettingStore'
   import IconSelector from './IconSelector.vue'
+  import { t } from '@/utils/i18n'
 
   defineProps<{
     visible: boolean

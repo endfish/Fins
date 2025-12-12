@@ -1,23 +1,20 @@
 <template>
   <div class="tab-pane">
     <div class="sync-header">
-      <h3>Cloud Sync</h3>
+      <h3>{{ t('sync_section_title') }}</h3>
       <div class="toggle-wrapper" @click="store.syncEnabled = !store.syncEnabled">
         <div class="toggle-track" :class="{ active: store.syncEnabled }">
           <div class="toggle-thumb"></div>
         </div>
-        <span class="status-text">{{ store.syncEnabled ? 'Enabled' : 'Disabled' }}</span>
+        <span class="status-text">{{ store.syncEnabled ? t('sync_status_enabled') : t('sync_status_disabled') }}</span>
       </div>
     </div>
 
-    <p class="desc-text">
-      Sync data across devices using Google/Microsoft account. <br />
-      Enabled LZ-String compression for max efficiency.
-    </p>
+    <p class="desc-text" v-html="t('sync_desc')"></p>
 
     <div class="quota-box">
       <div class="quota-labels">
-        <span>Cloud Storage Usage</span>
+        <span>{{ t('sync_quota_label') }}</span>
         <span>{{ (store.syncUsage / 1024).toFixed(2) }} KB / {{ store.syncQuota / 1024 }} KB</span>
       </div>
       <div class="progress-bg">
@@ -30,42 +27,42 @@
 
     <div class="divider"></div>
 
-    <h3>Cloud Actions</h3>
+    <h3>{{ t('sync_section_cloud') }}</h3>
     <div class="action-grid">
       <div class="action-card" @click="store.pushToCloud">
         <div class="icon-circle"><i class="ri-upload-cloud-2-line"></i></div>
         <div class="text">
-          <div class="title">Upload</div>
-          <div class="sub">Local ➔ Cloud</div>
+          <div class="title">{{ t('sync_btn_upload') }}</div>
+          <div class="sub">{{ t('sync_btn_upload_sub') }}</div>
         </div>
       </div>
 
       <div class="action-card" @click="store.pullFromCloud">
         <div class="icon-circle"><i class="ri-download-cloud-2-line"></i></div>
         <div class="text">
-          <div class="title">Download</div>
-          <div class="sub">Cloud ➔ Local</div>
+          <div class="title">{{ t('sync_btn_download') }}</div>
+          <div class="sub">{{ t('sync_btn_download_sub') }}</div>
         </div>
       </div>
     </div>
 
     <div class="divider"></div>
 
-    <h3>File Backup</h3>
+    <h3>{{ t('sync_section_backup') }}</h3>
     <div class="action-grid">
       <div class="action-card" @click="store.exportData">
         <div class="icon-circle"><i class="ri-file-download-line"></i></div>
         <div class="text">
-          <div class="title">Export JSON</div>
-          <div class="sub">Save backup file</div>
+          <div class="title">{{ t('sync_btn_export') }}</div>
+          <div class="sub">{{ t('sync_btn_export_sub') }}</div>
         </div>
       </div>
 
       <div class="action-card" @click="triggerFileInput">
         <div class="icon-circle"><i class="ri-file-upload-line"></i></div>
         <div class="text">
-          <div class="title">Import JSON</div>
-          <div class="sub">Restore from file</div>
+          <div class="title">{{ t('sync_btn_import') }}</div>
+          <div class="sub">{{ t('sync_btn_import_sub') }}</div>
         </div>
         <input type="file" ref="fileInput" accept=".json" style="display: none" @change="handleFileImport" />
       </div>
@@ -73,13 +70,13 @@
 
     <div class="divider"></div>
 
-    <h3>Danger Zone</h3>
+    <h3>{{ t('sync_section_danger') }}</h3>
     <div class="danger-box">
       <div class="danger-info">
-        <div class="d-title">Clear Cloud Data</div>
-        <div class="d-desc">Permanently remove all data from the cloud server.</div>
+        <div class="d-title">{{ t('sync_clear_title') }}</div>
+        <div class="d-desc">{{ t('sync_clear_desc') }}</div>
       </div>
-      <button class="danger-btn" @click="store.clearCloudData">Clear</button>
+      <button class="danger-btn" @click="store.clearCloudData">{{ t('btn_clear') }}</button>
     </div>
   </div>
 </template>
@@ -87,6 +84,7 @@
 <script setup lang="ts">
   import { ref } from 'vue'
   import { useSettingStore } from '@/store/useSettingStore'
+  import { t } from '@/utils/i18n'
 
   const store = useSettingStore()
   const fileInput = ref<HTMLInputElement | null>(null)
