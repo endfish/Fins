@@ -33,9 +33,9 @@ export const useGridStore = defineStore('grid', () => {
   const init = async () => {
     if (initialized.value) return
 
-    // 1. 加载 Groups (沿用原有逻辑，但 Key 建议换新以隔离旧版本)
-    const groupRes = await storage.get('fins_v2_groups')
-    let loadedGroups = groupRes?.['fins_v2_groups']
+    // 1. 加载 Groups
+    const groupRes = await storage.get('fins_groups')
+    let loadedGroups = groupRes?.['fins_groups']
 
     if (loadedGroups && Array.isArray(loadedGroups) && loadedGroups.length > 0) {
       groups.value = loadedGroups
@@ -48,8 +48,8 @@ export const useGridStore = defineStore('grid', () => {
     }
 
     // 2. 加载 Items
-    const itemRes = await storage.get('fins_v2_items')
-    let loadedItems = itemRes?.['fins_v2_items']
+    const itemRes = await storage.get('fins_items')
+    let loadedItems = itemRes?.['fins_items']
 
     if (loadedItems && Array.isArray(loadedItems)) {
       items.value = loadedItems
@@ -69,14 +69,7 @@ export const useGridStore = defineStore('grid', () => {
           type: 'link-card',
           size: '1x1',
           props: { name: 'YouTube', url: 'https://youtube.com', iconType: 'remix', iconValue: 'ri-youtube-fill', bgColor: 'rgba(255,0,0,0.4)' },
-        },
-        {
-          id: '3',
-          groupId: 'default_home',
-          type: 'link-card',
-          size: '1x1',
-          props: { name: 'Fins Repo', url: 'https://github.com', iconType: 'text', iconValue: 'FN', bgColor: 'rgba(41, 151, 255, 0.5)' },
-        },
+        }
       ]
     }
 
@@ -119,12 +112,12 @@ export const useGridStore = defineStore('grid', () => {
     if (idx !== -1) {
       const oldItem = items.value[idx]
       const newProps = updates.props || {}
-      
+
       items.value[idx] = {
         ...oldItem,
         ...updates,
         props: { ...oldItem?.props, ...newProps },
-      } as GridItem 
+      } as GridItem
     }
   }
 
@@ -132,6 +125,13 @@ export const useGridStore = defineStore('grid', () => {
   const addGroup = (group: Omit<Group, 'id'>) => {
     const id = Date.now().toString()
     groups.value.push({ ...group, id })
+  }
+
+  const updateGroup = (id: string, updates: Partial<Group>) => {
+    const idx = groups.value.findIndex((g) => g.id === id)
+    if (idx !== -1) {
+      groups.value[idx] = { ...groups.value[idx], ...updates } as Group
+    }
   }
 
   const removeGroup = (id: string) => {
@@ -159,9 +159,9 @@ export const useGridStore = defineStore('grid', () => {
     async (newVal) => {
       if (!initialized.value) return
       const data = JSON.parse(JSON.stringify(newVal))
-      storage.set({ fins_v2_items: data }, 'local')
+      storage.set({ fins_items: data }, 'local')
       if (settingStore.syncEnabled) {
-        await storage.set({ fins_v2_items: data }, 'sync')
+        await storage.set({ fins_items: data }, 'sync')
         settingStore.updateSyncUsage()
       }
     },
@@ -173,9 +173,9 @@ export const useGridStore = defineStore('grid', () => {
     async (newVal) => {
       if (!initialized.value) return
       const data = JSON.parse(JSON.stringify(newVal))
-      storage.set({ fins_v2_groups: data }, 'local')
+      storage.set({ fins_groups: data }, 'local')
       if (settingStore.syncEnabled) {
-        await storage.set({ fins_v2_groups: data }, 'sync')
+        await storage.set({ fins_groups: data }, 'sync')
         settingStore.updateSyncUsage()
       }
     },
@@ -194,6 +194,7 @@ export const useGridStore = defineStore('grid', () => {
     removeItem,
     updateItem,
     addGroup,
+    updateGroup,
     removeGroup,
     reorderGroups,
     reorderCurrentItems,

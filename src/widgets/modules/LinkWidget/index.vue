@@ -30,12 +30,10 @@
   const props = computed(() => item.props || {})
   const bgColor = computed(() => props.value.bgColor || 'rgba(255,255,255,0.1)')
 
-  // 核心判断
   const isBrandIcon = computed(() => {
     return props.value.iconValue && props.value.iconValue.startsWith('si:')
   })
 
-  // 查找路径
   const brandPath = computed(() => {
     if (!isBrandIcon.value) return ''
     const slug = props.value.iconValue.replace('si:', '')
@@ -55,9 +53,7 @@
   const openLink = () => {
     const url = props.value.url
     if (!url) return
-    // @ts-ignore
     if (typeof chrome !== 'undefined' && chrome.tabs && chrome.tabs.create) {
-      // @ts-ignore
       chrome.tabs.create({ url, active: true })
     } else {
       window.open(url, '_blank')
@@ -74,7 +70,7 @@
     cursor: pointer;
     width: 90px; // 限制宽度，确保文字截断生效
 
-    // 核心交互：Hover 整个组件时，触发内部图标的动效
+    // Hover 整个组件时，触发内部图标的动效
     &:hover {
       .icon-shell {
         transform: translateY(-4px) scale(1.05);

@@ -4,7 +4,7 @@ import App from './App.vue'
 
 // 引入全局样式
 import './styles/main.less'
-// 引入 RemixIcon (确保你执行了 pnpm add remixicon)
+// 引入 RemixIcon
 import 'remixicon/fonts/remixicon.css'
 
 const app = createApp(App)

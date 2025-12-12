@@ -63,7 +63,6 @@
 </script>
 
 <style lang="less" scoped>
-  /* 完全复用 LinkModal 的样式 */
   .modal-overlay {
     position: fixed;
     inset: 0;

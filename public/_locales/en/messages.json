@@ -20,6 +20,7 @@
 
   "_comment_sidebar": { "message": "--- Sidebar ---" },
   "group_add_title": { "message": "Add Group" },
+  "group_edit_title": { "message": "Edit Group" },
   "group_name_label": { "message": "Group Name" },
   "group_delete_confirm_title": { "message": "Delete Group" },
   "group_delete_confirm_desc": { 
@@ -190,6 +191,20 @@
     "message": "$COUNT$ icons loaded.",
     "placeholders": {
       "COUNT": { "content": "$1" }
+    }
+  },
+
+  "_comment_smart_grid": { "message": "--- Smart Grid ---" },
+  "confirm_delete_widget_title": { "message": "Delete Widget" },
+  "confirm_delete_widget_content": { "message": "Are you sure you want to remove this widget?" },
+  "confirm_remove_widget_content": { "message": "Remove this widget directly?" },
+  "common_remove": { "message": "Remove" },
+  "toast_widget_updated": { "message": "Widget updated" },
+  "toast_widget_added": { "message": "Widget added" },
+  "toast_unknown_widget_type": { 
+    "message": "Unknown widget type: $TYPE$",
+    "placeholders": {
+        "TYPE": { "content": "$1" }
     }
   },
 

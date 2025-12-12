@@ -67,7 +67,6 @@
 </script>
 
 <style lang="less" scoped>
-  /* 样式保持不变 */
   .fins-app {
     width: 100vw;
     height: 100vh;

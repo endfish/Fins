@@ -16,30 +16,40 @@
 
     <div class="divider"></div>
 
-    <div class="sidebar-item add-btn" @click="showModal = true" :title="t('group_add_title')">
+    <div class="sidebar-item add-btn" @click="openAddModal" :title="t('group_add_title')">
       <i class="ri-add-line"></i>
     </div>
   </div>
 
-  <GroupModal :visible="showModal" @close="showModal = false" @save="saveGroup" />
+  <GroupModal :visible="showModal" :editing-group="editingGroup" @close="showModal = false" @save="saveGroup" />
+
+  <ContextMenu :visible="menuState.visible" :x="menuState.x" :y="menuState.y" :has-target="true" @close="closeContextMenu" @edit="handleMenuEdit" @delete="handleMenuDelete" />
 </template>
 
 <script setup lang="ts">
-  import { ref, computed } from 'vue'
+  import { ref, computed, reactive } from 'vue'
   import { storeToRefs } from 'pinia'
   import draggable from 'vuedraggable'
   // 核心变更：引入新的 Store 和 Type
   import { useGridStore, type Group } from '@/store/useGridStore'
   import { useConfirmStore } from '@/store/useConfirmStore'
   import GroupModal from './GroupModal.vue'
+  import ContextMenu from './ContextMenu.vue'
   import { t } from '@/utils/i18n'
 
   const store = useGridStore()
   const { groups, currentGroupId } = storeToRefs(store)
   const showModal = ref(false)
   const confirmStore = useConfirmStore()
+  const editingGroup = ref<Group | null>(null) // [!code ++] 当前正在编辑的分组
 
-  // 这里的逻辑和之前一样，只是底层数据源变了
+  // [!code ++] 右键菜单状态
+  const menuState = reactive({
+    visible: false,
+    x: 0,
+    y: 0,
+    targetGroup: null as Group | null,
+  })
   const draggableGroups = computed({
     get: () => groups.value,
     set: (val) => store.reorderGroups(val),
@@ -48,14 +58,38 @@
   const handleGroupClick = (id: string) => {
     store.setCurrentGroup(id)
   }
-
-  const saveGroup = (groupData: any) => {
-    store.addGroup(groupData)
-    showModal.value = false
+  // 1. 打开新增窗口
+  const openAddModal = () => {
+    editingGroup.value = null // 清空编辑状态
+    showModal.value = true
   }
 
-  const handleContextMenu = async (_e: MouseEvent, group: Group) => {
+  // 2. 右键触发菜单
+  const handleContextMenu = (e: MouseEvent, group: Group) => {
+    // 默认分组不允许操作 (Home)
     if (group.isDefault) return
+
+    menuState.x = e.clientX
+    menuState.y = e.clientY
+    menuState.targetGroup = group
+    menuState.visible = true
+  }
+
+  // 3. 菜单动作：编辑
+  const handleMenuEdit = () => {
+    if (menuState.targetGroup) {
+      editingGroup.value = menuState.targetGroup
+      showModal.value = true
+    }
+    closeContextMenu()
+  }
+
+  // 4. 菜单动作：删除
+  const handleMenuDelete = async () => {
+    const group = menuState.targetGroup
+    closeContextMenu()
+
+    if (!group) return
 
     const ok = await confirmStore.show({
       title: t('group_delete_confirm_title'),
@@ -68,6 +102,23 @@
     if (ok) {
       store.removeGroup(group.id)
     }
+  }
+
+  const closeContextMenu = () => {
+    menuState.visible = false
+    menuState.targetGroup = null
+  }
+
+  // 5. 保存逻辑 (新增或更新)
+  const saveGroup = (groupData: any) => {
+    if (editingGroup.value) {
+      // Update
+      store.updateGroup(editingGroup.value.id, groupData)
+    } else {
+      // Create
+      store.addGroup(groupData)
+    }
+    showModal.value = false
   }
 </script>
 

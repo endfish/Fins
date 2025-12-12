@@ -43,6 +43,7 @@
   import { useGridStore, type GridItem } from '@/store/useGridStore'
   import { useConfirmStore } from '@/store/useConfirmStore'
   import { useToastStore } from '@/store/useToastStore'
+  import { t } from '@/utils/i18n'
 
   import ContextMenu from '@/components/ContextMenu.vue'
   import WidgetGalleryModal from '@/components/WidgetGalleryModal.vue'
@@ -58,7 +59,7 @@
 
   type WidgetDef = { view: any; edit: any; defaultSize: GridItem['size'] }
 
-  // [!code ++] Requirement 1: Link Card 已经标准化，只是 Registry 中的一项
+  // Requirement 1: Link Card 已经标准化，只是 Registry 中的一项
   const WIDGET_REGISTRY: Record<string, WidgetDef> = {
     'link-card': {
       view: LinkIndex,
@@ -110,7 +111,7 @@
   const openEditModal = (type: string, data: any = null, id: string | null = null) => {
     const def = WIDGET_REGISTRY[type]
     if (!def) {
-      toast.error(`Unknown widget type: ${type}`)
+      toast.error(t('toast_unknown_widget_type', [type]))
       return
     }
 
@@ -168,7 +169,7 @@
       if (size) updates.size = size // 只有当明确传了 size 时才更新它
 
       store.updateItem(currentEditSession.targetId, updates)
-      toast.success('Widget updated')
+      toast.success(t('toast_widget_updated'))
     } else {
       // Create
       store.addItem({
@@ -176,7 +177,7 @@
         size: newSize,
         props: widgetProps,
       })
-      toast.success('Widget added')
+      toast.success(t('toast_widget_added'))
     }
     closeEditSession()
   }
@@ -188,9 +189,10 @@
     }
 
     const ok = await confirmStore.show({
-      title: 'Delete Widget',
-      content: 'Are you sure you want to remove this widget?',
-      confirmText: 'Delete',
+      title: t('confirm_delete_widget_title'),
+      content: t('confirm_delete_widget_content'),
+      confirmText: t('common_delete'),
+      cancelText: t('common_cancel'),
       isDanger: true,
     })
 
@@ -248,9 +250,10 @@
       closeContextMenu()
       confirmStore
         .show({
-          title: 'Delete Widget',
-          content: 'Remove this widget directly?',
-          confirmText: 'Remove',
+          title: t('confirm_delete_widget_title'),
+          content: t('confirm_remove_widget_content'),
+          confirmText: t('common_remove'),
+          cancelText: t('common_cancel'),
           isDanger: true,
         })
         .then((ok) => {

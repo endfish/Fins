@@ -65,7 +65,6 @@
   import ColorSelector from '@/components/ColorSelector.vue'
   import { t } from '@/utils/i18n'
 
-  // 定义一个松散的接口，适配 GridItem 的 props
   interface WidgetFormData {
     url?: string
     name?: string
@@ -76,7 +75,7 @@
 
   const props = defineProps<{
     visible: boolean
-    editingItem: any | null // 接收 { id, ...props }
+    editingItem: any | null
   }>()
 
   const emit = defineEmits(['close', 'save', 'delete', 'switch-to-widget'])
@@ -100,7 +99,7 @@
         if (props.editingItem) {
           // 深拷贝，防止修改 props
           formData.value = JSON.parse(JSON.stringify(props.editingItem))
-          // 确保 bgColor 存在（兼容旧数据）
+          // 确保 bgColor 存在
           if (!formData.value.bgColor) formData.value.bgColor = 'rgba(255,255,255,0.1)'
         } else {
           // 重置
@@ -123,7 +122,6 @@
           formData.value.name = namePart.charAt(0).toUpperCase() + namePart.slice(1)
         }
       } catch (e) {
-        // ignore
       }
     }
   }
@@ -141,7 +139,6 @@
 </script>
 
 <style lang="less" scoped>
-  /* 样式保持不变，完美复用 */
   .modal-overlay {
     position: fixed;
     inset: 0;

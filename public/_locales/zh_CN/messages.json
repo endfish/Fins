@@ -20,6 +20,7 @@
 
   "_comment_sidebar": { "message": "--- 侧边栏 ---" },
   "group_add_title": { "message": "添加分组" },
+  "group_edit_title": { "message": "编辑分组" },
   "group_name_label": { "message": "分组名称" },
   "group_delete_confirm_title": { "message": "删除分组" },
   "group_delete_confirm_desc": { 
@@ -155,7 +156,7 @@
   "label_bg_image_url": { "message": "背景图片" },
   "tip_bg_image_selection": { "message": "选择本地预设或输入直链。<br>图片仅作为 URL/路径同步。" },
   "label_fallback_color": { "message": "兜底颜色 (无图片时)" },
-  "anniversary_days_since": { "message": "已在" },
+  "anniversary_days_since": { "message": "天" },
   "anniversary_days_left": { "message": "还有" },
 
   "_comment_widget_count": { "message": "--- 组件: 倒计时 ---" },
@@ -190,6 +191,20 @@
     "message": "已加载 $COUNT$ 个图标。",
     "placeholders": {
       "COUNT": { "content": "$1" }
+    }
+  },
+
+  "_comment_smart_grid": { "message": "--- 智能网格 ---" },
+  "confirm_delete_widget_title": { "message": "删除组件" },
+  "confirm_delete_widget_content": { "message": "确定要移除此组件吗？" },
+  "confirm_remove_widget_content": { "message": "直接移除此组件？" },
+  "common_remove": { "message": "移除" },
+  "toast_widget_updated": { "message": "组件已更新" },
+  "toast_widget_added": { "message": "组件已添加" },
+  "toast_unknown_widget_type": { 
+    "message": "未知组件类型：$TYPE$",
+    "placeholders": {
+        "TYPE": { "content": "$1" }
     }
   },
 

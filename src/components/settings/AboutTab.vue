@@ -2,7 +2,7 @@
   <div class="tab-pane about-pane">
     <img src="/logo.svg" class="logo" />
     <h2>Fins</h2>
-    <p class="version">v0.0.1 Beta</p>
+    <p class="version">v1.0.0</p>
 
     <div class="desc-box">
       {{ t('app_desc') }}

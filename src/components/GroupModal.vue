@@ -2,7 +2,7 @@
   <div class="modal-overlay" v-if="visible" @click.self="emit('close')">
     <div class="modal-card">
       <div class="modal-header">
-        <h3>{{ t('group_add_title') }}</h3>
+        <h3>{{ editingGroup ? t('group_edit_title') : t('group_add_title') }}</h3>
       </div>
 
       <div class="form-group">
@@ -29,9 +29,11 @@
   import { ref, watch } from 'vue'
   import IconSelector from './IconSelector.vue'
   import { t } from '@/utils/i18n'
+  import type { Group } from '@/store/useGridStore'
 
   const props = defineProps<{
     visible: boolean
+    editingGroup?: Group | null
   }>()
 
   const emit = defineEmits(['close', 'save'])
@@ -46,7 +48,14 @@
     () => props.visible,
     (val) => {
       if (val) {
-        formData.value = { name: '', icon: '' }
+        if (props.editingGroup) {
+          formData.value = {
+            name: props.editingGroup.name,
+            icon: props.editingGroup.icon,
+          }
+        } else {
+          formData.value = { name: '', icon: '' }
+        }
       }
     }
   )

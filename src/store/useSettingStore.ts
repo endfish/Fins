@@ -128,13 +128,13 @@ export const useSettingStore = defineStore('settings', () => {
       fins_current_engine_index: currentEngineIndex.value,
 
       // Grid Data (V2)
-      fins_v2_groups: JSON.parse(JSON.stringify(gridStore.groups)),
-      fins_v2_items: JSON.parse(JSON.stringify(gridStore.items)),
+      fins_groups: JSON.parse(JSON.stringify(gridStore.groups)),
+      fins_items: JSON.parse(JSON.stringify(gridStore.items)),
       fins_current_group_id: gridStore.currentGroupId,
 
       // Meta
       timestamp: Date.now(),
-      version: '0.0.2', // 升级版本号
+      version: '1.0.0', // 升级版本号
       platform: 'fins-extension',
     }
   }
@@ -156,15 +156,15 @@ export const useSettingStore = defineStore('settings', () => {
     const gridStore = useGridStore()
 
     // 优先读取 V2 数据
-    if (data.fins_v2_groups && Array.isArray(data.fins_v2_groups)) {
-      gridStore.groups = data.fins_v2_groups
+    if (data.fins_groups && Array.isArray(data.fins_groups)) {
+      gridStore.groups = data.fins_groups
     } else if (data.fins_groups) {
       // 可选：在这里做 V1 -> V2 的迁移逻辑，或者直接忽略
       toast.warning(t('toast_old_format'))
     }
 
-    if (data.fins_v2_items && Array.isArray(data.fins_v2_items)) {
-      gridStore.items = data.fins_v2_items
+    if (data.fins_items && Array.isArray(data.fins_items)) {
+      gridStore.items = data.fins_items
     }
 
     if (data.fins_current_group_id) {
@@ -293,7 +293,7 @@ export const useSettingStore = defineStore('settings', () => {
         const data = JSON.parse(json)
 
         // 简单校验
-        if (!data.fins_v2_items && !data.fins_links && !data.version) {
+        if (!data.fins_items && !data.fins_links && !data.version) {
           toast.error(t('toast_import_invalid'))
           return
         }
