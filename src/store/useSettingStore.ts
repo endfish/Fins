@@ -6,6 +6,7 @@ import { useGridStore } from './useGridStore'
 import { useToastStore } from './useToastStore'
 import { useConfirmStore } from './useConfirmStore'
 import LZString from 'lz-string'
+import { t } from '@/utils/i18n'
 
 export interface SearchEngine {
   name: string
@@ -98,7 +99,7 @@ export const useSettingStore = defineStore('settings', () => {
   }
   const removeEngine = (index: number) => {
     if (searchEngines.value.length <= 1) {
-      toast.info('Keep at least one engine.')
+      toast.info(t('toast_keep_one_engine'))
       return
     }
     searchEngines.value.splice(index, 1)
@@ -159,7 +160,7 @@ export const useSettingStore = defineStore('settings', () => {
       gridStore.groups = data.fins_v2_groups
     } else if (data.fins_groups) {
       // 可选：在这里做 V1 -> V2 的迁移逻辑，或者直接忽略
-      toast.warning('Old backup format detected. Some data structure might vary.')
+      toast.warning(t('toast_old_format'))
     }
 
     if (data.fins_v2_items && Array.isArray(data.fins_v2_items)) {
@@ -177,9 +178,10 @@ export const useSettingStore = defineStore('settings', () => {
 
   const pushToCloud = async () => {
     const isConfirmed = await confirmStore.show({
-      title: 'Overwrite Cloud Data?',
-      content: 'Overwrite cloud data with local data?',
-      confirmText: 'Confirm',
+      title: t('confirm_upload_title'),
+      content: t('confirm_upload_content'),
+      confirmText: t('common_confirm'),
+      cancelText: t('common_cancel'),
       isDanger: false,
     })
 
@@ -194,18 +196,19 @@ export const useSettingStore = defineStore('settings', () => {
       await storage.set({ fins_compressed_data: compressed }, 'sync')
 
       await updateSyncUsage()
-      toast.success(`Upload Success!`)
+      toast.success(t('toast_upload_success'))
     } catch (e) {
       console.error(e)
-      toast.warning('Upload failed. Data might be too large.')
+      toast.warning(t('toast_upload_failed'))
     }
   }
 
   const pullFromCloud = async () => {
     const isConfirmed = await confirmStore.show({
-      title: 'Overwrite Local Data?',
-      content: 'Overwrite local data with cloud data?',
-      confirmText: 'Confirm',
+      title: t('confirm_download_title'),
+      content: t('confirm_download_content'),
+      confirmText: t('common_confirm'),
+      cancelText: t('common_cancel'),
       isDanger: false,
     })
 
@@ -215,7 +218,7 @@ export const useSettingStore = defineStore('settings', () => {
       const result = await storage.get(null, 'sync')
 
       if (!result || Object.keys(result).length === 0) {
-        toast.info('Cloud storage is empty.')
+        toast.info(t('toast_cloud_empty'))
         return
       }
 
@@ -230,23 +233,24 @@ export const useSettingStore = defineStore('settings', () => {
       }
 
       if (!data) {
-        toast.error('Unknown data format in cloud.')
+        toast.error(t('toast_download_failed'))
         return
       }
 
       restoreFullData(data)
-      toast.success('Download Success!')
+      toast.success(t('toast_download_success'))
     } catch (e) {
       console.error(e)
-      toast.error('Download failed.')
+      toast.error(t('toast_download_failed'))
     }
   }
 
   const clearCloudData = async () => {
     const isConfirmed = await confirmStore.show({
-      title: 'Clear Cloud Data?',
-      content: 'Permanently delete cloud data?',
-      confirmText: 'Delete',
+      title: t('confirm_clear_cloud_title'),
+      content: t('confirm_clear_cloud_content'),
+      confirmText: t('common_delete'),
+      cancelText: t('common_cancel'),
       isDanger: true,
     })
 
@@ -255,10 +259,10 @@ export const useSettingStore = defineStore('settings', () => {
     try {
       await storage.clear('sync')
       await updateSyncUsage()
-      toast.success('Cloud storage cleared.')
+      toast.success(t('toast_cloud_cleared'))
     } catch (e) {
       console.error(e)
-      toast.error('Failed to clear cloud storage.')
+      toast.error(t('toast_cloud_clear_failed'))
     }
   }
 
@@ -290,24 +294,25 @@ export const useSettingStore = defineStore('settings', () => {
 
         // 简单校验
         if (!data.fins_v2_items && !data.fins_links && !data.version) {
-          toast.error('Invalid Fins backup file.')
+          toast.error(t('toast_import_invalid'))
           return
         }
 
         const isConfirmed = await confirmStore.show({
-          title: 'Restore Data?',
-          content: 'Restore data from file? Current data will be overwritten.',
-          confirmText: 'Confirm',
+          title: t('confirm_restore_title'),
+          content: t('confirm_restore_content'),
+          confirmText: t('common_confirm'),
+          cancelText: t('common_cancel'),
           isDanger: false,
         })
 
         if (isConfirmed) {
           restoreFullData(data)
-          toast.success('Import Success!')
+          toast.success(t('toast_import_success'))
         }
       } catch (e) {
         console.error(e)
-        toast.error('Failed to parse JSON file.')
+        toast.error(t('toast_file_parse_error'))
       }
     }
     reader.readAsText(file)

@@ -1,19 +1,115 @@
 {
-  "appName": {
+  "app_name": {
     "message": "Fins - Geek New Tab",
-    "description": "Extension name"
+    "description": "The name of the extension"
   },
-  "appDesc": {
-    "message": "A clean, minimalist new tab extension.",
-    "description": "Extension description"
+  "app_desc": {
+    "message": "A clean, minimalist new tab extension. Built with Vue 3, Vite, TypeScript.",
+    "description": "Description"
   },
-  "settingTitle": {
-    "message": "Settings"
+  
+  "_comment_common": { "message": "--- Common ---" },
+  "common_confirm": { "message": "Confirm" },
+  "common_cancel": { "message": "Cancel" },
+  "common_save": { "message": "Save" },
+  "common_delete": { "message": "Delete" },
+  "common_edit": { "message": "Edit" },
+  "common_add": { "message": "Add" },
+  "common_back": { "message": "Back" },
+  "common_loading": { "message": "Loading..." },
+
+  "_comment_sidebar": { "message": "--- Sidebar ---" },
+  "group_add_title": { "message": "Add Group" },
+  "group_name_label": { "message": "Group Name" },
+  "group_delete_confirm_title": { "message": "Delete Group" },
+  "group_delete_confirm_desc": { 
+    "message": "Are you sure you want to delete \"$NAME$\"? Widgets inside will be removed.",
+    "placeholders": {
+      "NAME": {
+        "content": "$1"
+      }
+    }
   },
-  "general": {
-    "message": "General"
+
+  "_comment_settings": { "message": "--- Settings ---" },
+  "settings_title": { "message": "Settings" },
+  "nav_general": { "message": "General" },
+  "nav_sync": { "message": "Sync" },
+  "nav_about": { "message": "About" },
+
+  "_comment_settings_general": { "message": "--- General Settings ---" },
+  "section_customization": { "message": "Customization" },
+  "label_brand_title": { "message": "Brand Title" },
+  "desc_brand_title": { "message": "Displayed on the main screen." },
+  "section_wallpaper": { "message": "Wallpaper" },
+  "mode_bing": { "message": "Bing Daily" },
+  "mode_custom": { "message": "Custom URL" },
+  "input_custom_bg_placeholder": { "message": "Enter direct image link..." },
+
+  "_comment_settings_sync": { "message": "--- Sync Settings ---" },
+  "sync_section_title": { "message": "Cloud Sync" },
+  "sync_status_enabled": { "message": "Enabled" },
+  "sync_status_disabled": { "message": "Disabled" },
+  "sync_desc": { "message": "Sync data across devices using Google/Microsoft account.<br>Enabled LZ-String compression for max efficiency." },
+  "sync_quota_label": { "message": "Storage Usage" },
+  
+  "sync_section_cloud": { "message": "Cloud Actions" },
+  "sync_btn_upload": { "message": "Upload" },
+  "sync_btn_upload_sub": { "message": "Local ➔ Cloud" },
+  "sync_btn_download": { "message": "Download" },
+  "sync_btn_download_sub": { "message": "Cloud ➔ Local" },
+
+  "sync_section_backup": { "message": "File Backup" },
+  "sync_btn_export": { "message": "Export JSON" },
+  "sync_btn_export_sub": { "message": "Save backup file" },
+  "sync_btn_import": { "message": "Import JSON" },
+  "sync_btn_import_sub": { "message": "Restore from file" },
+
+  "sync_section_danger": { "message": "Danger Zone" },
+  "sync_clear_title": { "message": "Clear Cloud Data" },
+  "sync_clear_desc": { "message": "Permanently remove all data from the cloud server." },
+  "btn_clear": { "message": "Clear" },
+
+  "_comment_store_actions": { "message": "--- Store Feedback ---" },
+  "toast_keep_one_engine": { "message": "Keep at least one engine." },
+  "toast_upload_success": { "message": "Upload Success!" },
+  "toast_upload_failed": { "message": "Upload failed. Data might be too large." },
+  "toast_cloud_empty": { "message": "Cloud storage is empty." },
+  "toast_download_success": { "message": "Download Success!" },
+  "toast_download_failed": { "message": "Download failed." },
+  "toast_cloud_cleared": { "message": "Cloud storage cleared." },
+  "toast_cloud_clear_failed": { "message": "Failed to clear cloud storage." },
+  "toast_import_success": { "message": "Import Success!" },
+  "toast_import_invalid": { "message": "Invalid Fins backup file." },
+  "toast_file_parse_error": { "message": "Failed to parse JSON file." },
+  "toast_old_format": { "message": "Old format detected. Data structure might vary." },
+
+  "confirm_upload_title": { "message": "Overwrite Cloud Data?" },
+  "confirm_upload_content": { "message": "Overwrite cloud data with local data?" },
+  "confirm_download_title": { "message": "Overwrite Local Data?" },
+  "confirm_download_content": { "message": "Overwrite local data with cloud data? This is irreversible." },
+  "confirm_clear_cloud_title": { "message": "Clear Cloud Data?" },
+  "confirm_clear_cloud_content": { "message": "Permanently delete cloud backup?" },
+  "confirm_restore_title": { "message": "Restore Data?" },
+  "confirm_restore_content": { "message": "Restore from file? Current data will be overwritten." },
+
+  "_comment_search": { "message": "--- Search Bar ---" },
+  "search_placeholder": { 
+    "message": "Search with $ENGINE$...",
+    "placeholders": {
+      "ENGINE": {
+        "content": "$1"
+      }
+    }
   },
-  "save": {
-    "message": "Save"
-  }
+  "search_switch_tooltip": { "message": "Left-click: Switch | Right-click: Settings" },
+  "search_engines_title": { "message": "Search Engines" },
+  "label_name": { "message": "Name" },
+  "label_url_prefix": { "message": "URL Prefix" },
+  "label_icon": { "message": "Icon" },
+  "placeholder_engine_name": { "message": "ex: Google" },
+  "placeholder_engine_url": { "message": "https://google.com/search?q=" },
+  "tip_engine_query": { "message": "Query will be appended to the end." },
+  "text_selected": { "message": "Selected" },
+  "btn_save_engine": { "message": "Save Engine" }
 }

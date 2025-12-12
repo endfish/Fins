@@ -5,8 +5,7 @@
     <p class="version">v0.0.1 Beta</p>
 
     <div class="desc-box">
-      <b>A clean, minimalist new tab extension.</b><br>
-      Built with Vue 3, Vite, TypeScript, and co-crafted by Gemini.
+      {{ t('app_desc') }}
     </div>
 
     <div class="poetry">“ Code is Poetry ”</div>
@@ -21,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-  // 纯展示组件，无需逻辑
+  import { t } from '@/utils/i18n'
 </script>
 
 <style lang="less" scoped>
