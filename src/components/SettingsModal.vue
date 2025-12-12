@@ -2,13 +2,13 @@
   <div class="modal-overlay" v-if="visible" @click.self="emit('close')">
     <div class="settings-card glass-panel">
       <div class="sidebar">
-        <div class="nav-title">Settings</div>
+        <div class="nav-title">{{ t('settings_title') }}</div>
 
-        <div class="nav-item" :class="{ active: currentTab === 'general' }" @click="currentTab = 'general'"><i class="ri-settings-4-line"></i> General</div>
+        <div class="nav-item" :class="{ active: currentTab === 'general' }" @click="currentTab = 'general'"><i class="ri-settings-4-line"></i> {{ t('nav_general') }}</div>
 
-        <div class="nav-item" :class="{ active: currentTab === 'sync' }" @click="currentTab = 'sync'"><i class="ri-cloud-line"></i> Sync</div>
+        <div class="nav-item" :class="{ active: currentTab === 'sync' }" @click="currentTab = 'sync'"><i class="ri-cloud-line"></i> {{ t('nav_sync') }}</div>
 
-        <div class="nav-item" :class="{ active: currentTab === 'about' }" @click="currentTab = 'about'"><i class="ri-information-line"></i> About</div>
+        <div class="nav-item" :class="{ active: currentTab === 'about' }" @click="currentTab = 'about'"><i class="ri-information-line"></i> {{ t('nav_about') }}</div>
       </div>
 
       <div class="content-area custom-scrollbar">
@@ -26,6 +26,7 @@
 
 <script setup lang="ts">
   import { ref, computed } from 'vue'
+  import { t } from '@/utils/i18n'
 
   // 引入拆分后的组件
   import GeneralTab from './settings/GeneralTab.vue'

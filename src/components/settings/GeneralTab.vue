@@ -1,25 +1,25 @@
 <template>
   <div class="tab-pane">
-    <h3>Customization</h3>
+    <h3>{{ t('section_customization') }}</h3>
 
     <div class="form-group">
-      <label>Brand Title</label>
+      <label>{{ t('label_brand_title') }}</label>
       <input v-model="store.title" class="styled-input" placeholder="Fins" maxlength="12" />
-      <p class="desc">Displayed on the main screen.</p>
+      <p class="desc">{{ t('desc_brand_title') }}</p>
     </div>
 
     <div class="divider"></div>
 
-    <h3>Wallpaper</h3>
+    <h3>{{ t('section_wallpaper') }}</h3>
     <div class="bg-selector">
       <div class="mode-switch">
-        <div class="mode-btn" :class="{ active: store.bgMode === 'bing' }" @click="store.setBgMode('bing')">Bing Daily</div>
-        <div class="mode-btn" :class="{ active: store.bgMode === 'custom' }" @click="store.setBgMode('custom')">Custom URL</div>
+        <div class="mode-btn" :class="{ active: store.bgMode === 'bing' }" @click="store.setBgMode('bing')">{{ t('mode_bing') }}</div>
+        <div class="mode-btn" :class="{ active: store.bgMode === 'custom' }" @click="store.setBgMode('custom')">{{ t('mode_custom') }}</div>
       </div>
 
       <div v-if="store.bgMode === 'custom'" class="custom-bg-input">
         <input v-model="store.customBgUrl" class="styled-input" placeholder="https://source.unsplash.com/random/1920x1080" />
-        <p class="desc">Enter a direct image link.</p>
+        <p class="desc">{{ t('input_custom_bg_placeholder') }}</p>
       </div>
     </div>
   </div>
@@ -27,6 +27,8 @@
 
 <script setup lang="ts">
   import { useSettingStore } from '@/store/useSettingStore'
+  import { t } from '@/utils/i18n'
+  
   const store = useSettingStore()
 
 </script>

@@ -29,6 +29,7 @@
   import { ref, computed } from 'vue'
   import { useSettingStore } from '@/store/useSettingStore'
   import SearchEngineModal from './SearchEngineModal.vue'
+  import { t } from '@/utils/i18n'
 
   const store = useSettingStore()
 

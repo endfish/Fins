@@ -16,7 +16,7 @@
 
     <div class="divider"></div>
 
-    <div class="sidebar-item add-btn" @click="showModal = true" title="Add Group">
+    <div class="sidebar-item add-btn" @click="showModal = true" :title="t('group_add_title')">
       <i class="ri-add-line"></i>
     </div>
   </div>
@@ -32,6 +32,7 @@
   import { useGridStore, type Group } from '@/store/useGridStore'
   import { useConfirmStore } from '@/store/useConfirmStore'
   import GroupModal from './GroupModal.vue'
+  import { t } from '@/utils/i18n'
 
   const store = useGridStore()
   const { groups, currentGroupId } = storeToRefs(store)
@@ -57,9 +58,10 @@
     if (group.isDefault) return
 
     const ok = await confirmStore.show({
-      title: 'Delete Group',
-      content: `Delete "${group.name}"? Widgets inside will be removed.`, // 提示语微调
-      confirmText: 'Delete',
+      title: t('group_delete_confirm_title'),
+      content: t('group_delete_confirm_desc', [group.name]),
+      confirmText: t('common_delete'),
+      cancelText: t('common_cancel'),
       isDanger: true,
     })
 

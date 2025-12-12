@@ -1,17 +1,60 @@
 {
-  "appName": {
-    "message": "Fins - 新标签页"
+  "app_name": {
+    "message": "Fins - 新标签页",
+    "description": "The name of the extension"
   },
-  "appDesc": {
-    "message": "一款极简、干净的新标签页扩展。"
+  "app_desc": {
+    "message": "一款极简、干净的新标签页扩展。基于 Vue 3, Vite, TypeScript 构建。",
+    "description": "Description"
   },
-  "settingTitle": {
-    "message": "设置"
+  
+  "_comment_common": { "message": "--- 通用词汇 ---" },
+  "common_confirm": { "message": "确定" },
+  "common_cancel": { "message": "取消" },
+  "common_save": { "message": "保存" },
+  "common_delete": { "message": "删除" },
+  "common_edit": { "message": "编辑" },
+  "common_add": { "message": "添加" },
+  "common_back": { "message": "返回" },
+  "common_loading": { "message": "加载中..." },
+
+  "_comment_sidebar": { "message": "--- 侧边栏 ---" },
+  "group_add_title": { "message": "添加分组" },
+  "group_name_label": { "message": "分组名称" },
+  "group_delete_confirm_title": { "message": "删除分组" },
+  "group_delete_confirm_desc": { 
+    "message": "确定要删除 \"$NAME$\" 吗？组内的组件也会被移除。",
+    "placeholders": {
+      "NAME": {
+        "content": "$1"
+      }
+    }
   },
-  "general": {
-    "message": "通用"
+
+  "_comment_settings": { "message": "--- 设置面板 ---" },
+  "settings_title": { "message": "设置" },
+  "nav_general": { "message": "通用" },
+  "nav_sync": { "message": "同步" },
+  "nav_about": { "message": "关于" },
+
+  "_comment_settings_general": { "message": "--- 通用设置 ---" },
+  "section_customization": { "message": "个性化" },
+  "label_brand_title": { "message": "品牌标题" },
+  "desc_brand_title": { "message": "显示在主屏幕中央的文字。" },
+  "section_wallpaper": { "message": "壁纸" },
+  "mode_bing": { "message": "Bing 每日" },
+  "mode_custom": { "message": "自定义链接" },
+  "input_custom_bg_placeholder": { "message": "输入图片直链..." },
+
+  "_comment_search": { "message": "--- 搜索栏 ---" },
+  "search_placeholder": { 
+    "message": "使用 $ENGINE$ 搜索...",
+    "placeholders": {
+      "ENGINE": {
+        "content": "$1"
+      }
+    }
   },
-  "save": {
-    "message": "保存"
-  }
+  "search_engines_title": { "message": "搜索引擎管理" },
+  "btn_add_engine": { "message": "添加引擎" }
 }

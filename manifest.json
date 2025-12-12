@@ -1,9 +1,9 @@
 {
   "manifest_version": 3,
-  "name": "Fins - Geek New Tab",
-  "default_locale": "en",
+  "name": "__MSG_app_name__",
+  "default_locale": "zh_CN",
   "version": "0.0.1",
-  "description": "A clean, minimalist new tab extension. Built with Vue 3, Vite, TypeScript, and co-crafted by Gemini.",
+  "description": "_MSG_app_desc__",
   "icons": {
     "16": "public/logo.png",
     "32": "public/logo.png",
