@@ -13,7 +13,7 @@
 
         <div class="main-count">
           <span class="number">{{ formatNumber(diffDays) }}</span>
-          <span class="label">Days Left</span>
+          <span class="label">{{ t('countdown_days_left') }}</span>
         </div>
 
         <div class="footer">
@@ -33,6 +33,7 @@
   import type { GridItem } from '@/store/useGridStore'
   import { formatNumber } from '@/utils/format'
   import { resolveWallpaperUrl } from '@/utils/wallpapers'
+  import { t } from '@/utils/i18n'
 
   const props = defineProps<{
     item: GridItem
@@ -123,9 +124,9 @@
 
   const cycleLabel = computed(() => {
     const map: Record<string, string> = {
-      weekly: 'Weekly',
-      monthly: 'Monthly',
-      yearly: 'Yearly',
+      weekly: t('cycle_weekly'),
+      monthly: t('cycle_monthly'),
+      yearly: t('cycle_yearly'),
     }
     return map[recurrence.value]
   })

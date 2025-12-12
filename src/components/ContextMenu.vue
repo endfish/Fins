@@ -5,25 +5,25 @@
       <template v-if="hasTarget">
         <div class="menu-item" @click="emit('edit')">
           <i class="ri-edit-line"></i>
-          <span>Edit</span>
+          <span>{{ t('common_edit') }}</span>
         </div>
 
         <div class="divider"></div>
 
         <div class="menu-item danger" @click="emit('delete')">
           <i class="ri-delete-bin-line"></i>
-          <span>Delete</span>
+          <span>{{ t('common_delete') }}</span>
         </div>
       </template>
 
       <template v-else>
         <div class="menu-item" @click="emit('add-link')">
           <i class="ri-link"></i>
-          <span>Add Link</span>
+          <span>{{ t('ctx_add_link') }}</span>
         </div>
         <div class="menu-item" @click="emit('add-widget')">
           <i class="ri-apps-line"></i>
-          <span>Add Widget</span>
+          <span>{{ t('ctx_add_widget') }}</span>
         </div>
       </template>
 
@@ -34,6 +34,7 @@
 </template>
 
 <script setup lang="ts">
+  import { t } from '@/utils/i18n'
   defineProps<{
     visible: boolean
     x: number

@@ -5,7 +5,7 @@
         <div class="quote-symbol">“</div>
         <div class="text-area">
           <p class="sentence" v-if="displayText">{{ displayText }}</p>
-          <p class="loading" v-else>Loading...</p>
+          <p class="loading" v-else>{{ t('common_loading') }}</p>
         </div>
         <div class="author" v-if="!isCustom && from">—— {{ from }}</div>
 
@@ -21,6 +21,7 @@
   import { ref, onMounted, computed, watch } from 'vue'
   import WidgetShell from '@/widgets/base/WidgetShell.vue'
   import type { GridItem } from '@/store/useGridStore'
+  import { t } from '@/utils/i18n'
 
   const props = defineProps<{
     item: GridItem

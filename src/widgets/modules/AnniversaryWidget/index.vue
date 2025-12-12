@@ -14,7 +14,7 @@
 
         <div class="main-count">
           <span class="number">{{ formatNumber(Math.abs(days)) }}</span>
-          <span class="unit">Days {{ days >= 0 ? 'Since' : 'Left' }}</span>
+          <span class="unit">{{ days >= 0 ? t('anniversary_days_since') : t('anniversary_days_left') }}</span>
         </div>
 
         <div class="footer-date">
@@ -32,6 +32,7 @@
   import type { GridItem } from '@/store/useGridStore'
   import { formatNumber } from '@/utils/format'
   import { resolveWallpaperUrl } from '@/utils/wallpapers'
+  import { t } from '@/utils/i18n'
 
   const props = defineProps<{
     item: GridItem

@@ -2,7 +2,7 @@
   <div class="modal-overlay" v-if="visible" @click.self="emit('close')">
     <div class="gallery-card">
       <div class="header">
-        <h3>Add Widget</h3>
+        <h3>{{ t('gallery_title') }}</h3>
         <button class="close-btn" @click="emit('close')"><i class="ri-close-line"></i></button>
       </div>
 
@@ -12,8 +12,8 @@
             <div class="lines"><span></span><span></span></div>
           </div>
           <div class="info">
-            <div class="name">Hitokoto</div>
-            <div class="desc">Daily quote / Custom text</div>
+            <div class="name">{{ t('widget_name_hito') }}</div>
+            <div class="desc">{{ t('widget_desc_hito') }}</div>
           </div>
           <div class="add-icon"><i class="ri-add-line"></i></div>
         </div>
@@ -23,8 +23,8 @@
             <span class="day">365</span>
           </div>
           <div class="info">
-            <div class="name">Days Matter</div>
-            <div class="desc">Track important dates</div>
+            <div class="name">{{ t('widget_name_anniv') }}</div>
+            <div class="desc">{{ t('widget_desc_anniv') }}</div>
           </div>
           <div class="add-icon"><i class="ri-add-line"></i></div>
         </div>
@@ -34,8 +34,8 @@
             <i class="ri-hourglass-fill"></i>
           </div>
           <div class="info">
-            <div class="name">Countdown</div>
-            <div class="desc">Recurring events</div>
+            <div class="name">{{ t('widget_name_count') }}</div>
+            <div class="desc">{{ t('widget_desc_count') }}</div>
           </div>
           <div class="add-icon"><i class="ri-add-line"></i></div>
         </div>
@@ -45,6 +45,7 @@
 </template>
 
 <script setup lang="ts">
+  import { t } from '@/utils/i18n'
   defineProps<{ visible: boolean }>()
   const emit = defineEmits(['close', 'add'])
 

@@ -1,8 +1,8 @@
 <template>
   <div class="image-picker-wrapper">
     <div class="input-group">
-      <input :value="modelValue" @input="handleInput" placeholder="Select image or paste URL..." class="styled-input" />
-      <div class="picker-btn" @click="showModal = true" title="Select from Local Gallery">
+      <input :value="modelValue" @input="handleInput" :placeholder="t('img_input_placeholder')" class="styled-input" />
+      <div class="picker-btn" @click="showModal = true" :title="t('img_btn_tooltip')">
         <i class="ri-image-2-line"></i>
       </div>
     </div>
@@ -12,7 +12,7 @@
         <div v-if="showModal" class="picker-overlay" @click.self="showModal = false">
           <div class="picker-card glass-panel">
             <div class="header">
-              <h3>Local Wallpapers</h3>
+              <h3>{{ t('img_modal_title') }}</h3>
               <button class="close-btn" @click="showModal = false">
                 <i class="ri-close-line"></i>
               </button>
@@ -25,12 +25,12 @@
                 <div class="img-name">{{ img.name }}</div>
               </div>
 
-              <div v-if="localWallpapers.length === 0" class="empty-tip">No images found in <code>src/assets/wallpapers</code></div>
+              <div v-if="localWallpapers.length === 0" class="empty-tip">{{ t('img_empty_tip') }}</div>
 
-              <div v-if="displayWallpapers.length < localWallpapers.length" class="loading-trigger">Loading more...</div>
+              <div v-if="displayWallpapers.length < localWallpapers.length" class="loading-trigger">{{ t('img_loading_more') }}</div>
             </div>
 
-            <div class="footer-tip">Storage optimized: Saving filename only.</div>
+            <div class="footer-tip">{{ t('img_storage_tip') }}</div>
           </div>
         </div>
       </Transition>
@@ -43,6 +43,7 @@
   import { getLocalWallpapers } from '@/utils/wallpapers'
   // [!code ++] 引入无限滚动工具
   import { useInfiniteScroll } from '@vueuse/core'
+  import { t } from '@/utils/i18n'
 
   defineProps<{
     modelValue: string

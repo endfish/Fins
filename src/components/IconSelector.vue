@@ -3,7 +3,7 @@
     <div class="toolbar">
       <div class="search-box">
         <i class="ri-search-line search-icon"></i>
-        <input v-model="searchQuery" placeholder="Search icons & brands..." class="search-input" autofocus />
+        <input v-model="searchQuery" :placeholder="t('icon_search_placeholder')" class="search-input" autofocus />
         <i v-if="searchQuery" class="ri-close-line clear-icon" @click="searchQuery = ''"></i>
       </div>
 
@@ -14,7 +14,7 @@
           class="tab"
           :class="{ active: filterType === type }"
           @click="filterType = type as any"
-          :title="type.toUpperCase()">
+          :title="getTabTitle(type)">
           <i v-if="type === 'all'" class="ri-apps-line"></i>
           <i v-else-if="type === 'line'" class="ri-checkbox-blank-circle-line"></i>
           <i v-else-if="type === 'fill'" class="ri-checkbox-blank-circle-fill"></i>
@@ -33,11 +33,11 @@
       </div>
 
       <div class="status-bar">
-        <span v-if="displayIcons.length === 0 && searchQuery">No icons found.</span>
+        <span v-if="displayIcons.length === 0 && searchQuery">{{ t('icon_not_found') }}</span>
         <span v-else-if="displayIcons.length < filteredTotal" class="loading-text">
           <i class="ri-loader-4-line spin"></i>
         </span>
-        <span v-else class="end-text">{{ filteredTotal }} icons loaded.</span>
+        <span v-else class="end-text">{{ t('icon_loaded_count', [filteredTotal.toString()]) }}</span>
       </div>
     </div>
   </div>
@@ -49,6 +49,7 @@
 
   import remixIconsData from '@/assets/icons.json'
   import brandIconsData from '@/assets/brands.json' // 导入生成的 JSON
+  import { t } from '@/utils/i18n'
 
   const props = defineProps<{
     modelValue: string
@@ -67,6 +68,12 @@
 
   const PAGE_SIZE = 100
   const currentPage = ref(1)
+
+  const getTabTitle = (type: string) => {
+    if (type === 'all') return t('icon_tab_all')
+    if (type === 'line') return t('icon_tab_line')
+    return t('icon_tab_fill')
+  }
 
   // --- 计算属性 ---
   const filteredAllIcons = computed<IconItem[]>(() => {

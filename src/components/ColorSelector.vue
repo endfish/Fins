@@ -12,7 +12,7 @@
         <i v-if="modelValue === color.value" class="ri-check-line check-icon"></i>
       </div>
 
-      <div class="custom-btn" :class="{ active: isCustomMode }" @click="toggleCustom" title="Custom Color">
+      <div class="custom-btn" :class="{ active: isCustomMode }" @click="toggleCustom" :title="t('color_btn_custom')">
         <i class="ri-palette-line"></i>
       </div>
     </div>
@@ -42,6 +42,7 @@
 <script setup lang="ts">
   import { ref, computed, watch } from 'vue'
   import { parseRgba, rgbToHex, hexToRgb, toRgbaString } from '@/utils/color'
+  import { t } from '@/utils/i18n'
 
   const props = defineProps<{
     modelValue: string
@@ -50,20 +51,20 @@
   const emit = defineEmits(['update:modelValue'])
 
   // 预设 (保持不变)
-  const presets = [
-    { name: 'Glass', value: 'rgba(255, 255, 255, 0.1)' },
-    { name: 'Dark', value: 'rgba(0, 0, 0, 0.5)' },
-    { name: 'Red', value: 'rgba(255, 0, 0, 0.5)' },
-    { name: 'Orange', value: 'rgba(255, 149, 0, 0.5)' },
-    { name: 'Yellow', value: 'rgba(255, 204, 0, 0.5)' },
-    { name: 'Green', value: 'rgba(52, 199, 89, 0.5)' },
-    { name: 'Teal', value: 'rgba(48, 176, 199, 0.5)' },
-    { name: 'Blue', value: 'rgba(0, 122, 255, 0.5)' },
-    { name: 'Indigo', value: 'rgba(88, 86, 214, 0.5)' },
-    { name: 'Purple', value: 'rgba(175, 82, 222, 0.5)' },
-    { name: 'Pink', value: 'rgba(255, 45, 85, 0.5)' },
-    { name: 'Slate', value: 'rgba(142, 142, 147, 0.5)' },
-  ]
+  const presets = computed(() => [
+    { name: t('color_preset_glass'), value: 'rgba(255, 255, 255, 0.1)' },
+    { name: t('color_preset_dark'), value: 'rgba(0, 0, 0, 0.5)' },
+    { name: t('color_preset_red'), value: 'rgba(255, 0, 0, 0.5)' },
+    { name: t('color_preset_orange'), value: 'rgba(255, 149, 0, 0.5)' },
+    { name: t('color_preset_yellow'), value: 'rgba(255, 204, 0, 0.5)' },
+    { name: t('color_preset_green'), value: 'rgba(52, 199, 89, 0.5)' },
+    { name: t('color_preset_teal'), value: 'rgba(48, 176, 199, 0.5)' },
+    { name: t('color_preset_blue'), value: 'rgba(0, 122, 255, 0.5)' },
+    { name: t('color_preset_indigo'), value: 'rgba(88, 86, 214, 0.5)' },
+    { name: t('color_preset_purple'), value: 'rgba(175, 82, 222, 0.5)' },
+    { name: t('color_preset_pink'), value: 'rgba(255, 45, 85, 0.5)' },
+    { name: t('color_preset_slate'), value: 'rgba(142, 142, 147, 0.5)' },
+  ])
 
   // --- 内部状态 ---
   const isCustomMode = ref(false)

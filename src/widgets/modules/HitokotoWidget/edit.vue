@@ -2,28 +2,26 @@
   <div class="modal-overlay" v-if="visible" @click.self="emit('close')">
     <div class="modal-card">
       <div class="modal-header">
-        <h3>Edit Hitokoto</h3>
+        <h3>{{ t('widget_hito_edit_title') }}</h3>
         <button class="delete-btn" @click="emit('delete')">
           <i class="ri-delete-bin-line"></i>
         </button>
       </div>
 
       <div class="form-group">
-        <label>Custom Text</label>
+        <label>{{ t('label_custom_text') }}</label>
         <div class="input-wrapper">
-          <textarea v-model="formData.customText" placeholder="Leave empty to use random quote..." class="styled-input textarea" rows="4" maxlength="100"></textarea>
+          <textarea v-model="formData.customText" :placeholder="t('placeholder_custom_text')" class="styled-input textarea" rows="4" maxlength="100"></textarea>
         </div>
-        <p class="tip">If set, this text will replace the daily quote.</p>
+        <p class="tip">{{ t('desc_custom_text') }}</p>
       </div>
 
       <div class="form-group">
-        <label>Background Color</label>
-        <ColorSelector v-model="formData.bgColor" />
+        <label>{{ t('label_bg_color') }}</label> <ColorSelector v-model="formData.bgColor" />
       </div>
 
       <div class="modal-footer">
-        <button class="cancel-btn" @click="emit('close')">Cancel</button>
-        <button class="save-btn" @click="handleSave">Save</button>
+        <button class="cancel-btn" @click="emit('close')">{{ t('common_cancel') }}</button> <button class="save-btn" @click="handleSave">{{ t('common_save') }}</button>
       </div>
     </div>
   </div>
@@ -32,6 +30,7 @@
 <script setup lang="ts">
   import { ref, watch } from 'vue'
   import ColorSelector from '@/components/ColorSelector.vue'
+  import { t } from '@/utils/i18n'
 
   const props = defineProps<{
     visible: boolean

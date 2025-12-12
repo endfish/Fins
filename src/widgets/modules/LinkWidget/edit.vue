@@ -2,7 +2,7 @@
   <div class="modal-overlay" v-if="visible" @click.self="emit('close')">
     <div class="modal-card">
       <div class="modal-header">
-        <h3>{{ editingItem ? 'Edit Widget' : 'Add Widget' }}</h3>
+        <h3>{{ editingItem ? t('widget_link_edit_title') : t('widget_link_add_title') }}</h3>
 
         <button v-if="editingItem" class="delete-btn" @click="emit('delete')">
           <i class="ri-delete-bin-line"></i>
@@ -10,22 +10,21 @@
       </div>
 
       <div class="form-group">
-        <label>URL</label>
+        <label>{{ t('label_url') }}</label>
         <div class="input-wrapper">
           <input v-model="formData.url" placeholder="ex: github.com" @keydown.enter="handleSave" @blur="autoFillName" autofocus class="styled-input" />
         </div>
       </div>
 
       <div class="form-group">
-        <label>Title</label>
-        <input v-model="formData.name" placeholder="ex: GitHub" class="styled-input" maxlength="12" />
+        <label>{{ t('label_title') }}</label> <input v-model="formData.name" placeholder="ex: GitHub" class="styled-input" maxlength="12" />
       </div>
 
       <div class="form-group">
-        <label>Icon Style</label>
+        <label>{{ t('label_icon_style') }}</label>
         <div class="type-selector">
           <div v-for="type in ['api', 'remix', 'text']" :key="type" class="type-option" :class="{ active: formData.iconType === type }" @click="formData.iconType = type as any">
-            {{ type === 'api' ? 'AUTO' : type.toUpperCase() }}
+            {{ type === 'api' ? t('option_auto') : type.toUpperCase() }}
           </div>
         </div>
       </div>
@@ -34,31 +33,27 @@
         <div class="info-box">
           <i class="ri-google-fill"></i>
           <div class="text-content">
-            <span class="main">Auto-fetch via Google Services</span>
-            <span class="sub">If the icon fails to load, please switch to <b>Remix</b> or <b>Text</b> mode.</span>
+            <span class="main">{{ t('link_auto_fetch_main') }}</span> <span class="sub">{{ t('link_auto_fetch_sub') }}</span>
           </div>
         </div>
       </div>
 
       <div class="form-group" v-if="formData.iconType === 'remix'">
-        <label>Select Icon</label>
-        <div class="selected-preview" v-if="formData.iconValue">Selected: <i :class="formData.iconValue"></i> {{ formData.iconValue }}</div>
+        <label>{{ t('label_select_icon') }}</label>
+        <div class="selected-preview" v-if="formData.iconValue">{{ t('text_selected') }}: <i :class="formData.iconValue"></i> {{ formData.iconValue }}</div>
         <IconSelector v-model="formData.iconValue" />
       </div>
 
       <div class="form-group" v-if="formData.iconType === 'text'">
-        <label>Short Text (Max 2)</label>
-        <input v-model="formData.iconValue" placeholder="GH" maxlength="2" class="styled-input center-text" />
+        <label>{{ t('label_short_text') }}</label> <input v-model="formData.iconValue" placeholder="GH" maxlength="2" class="styled-input center-text" />
       </div>
 
       <div class="form-group">
-        <label>Background Color</label>
-        <ColorSelector v-model="formData.bgColor" />
+        <label>{{ t('label_bg_color') }}</label> <ColorSelector v-model="formData.bgColor" />
       </div>
 
       <div class="modal-footer">
-        <button class="cancel-btn" @click="emit('close')">Cancel</button>
-        <button class="save-btn" @click="handleSave">Save</button>
+        <button class="cancel-btn" @click="emit('close')">{{ t('common_cancel') }}</button> <button class="save-btn" @click="handleSave">{{ t('common_save') }}</button>
       </div>
     </div>
   </div>
@@ -68,6 +63,7 @@
   import { ref, watch } from 'vue'
   import IconSelector from '@/components/IconSelector.vue'
   import ColorSelector from '@/components/ColorSelector.vue'
+  import { t } from '@/utils/i18n'
 
   // 定义一个松散的接口，适配 GridItem 的 props
   interface WidgetFormData {

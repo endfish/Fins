@@ -2,28 +2,28 @@
   <div class="modal-overlay" v-if="visible" @click.self="emit('close')">
     <div class="modal-card">
       <div class="modal-header">
-        <h3>{{ editingItem ? 'Edit Countdown' : 'Add Countdown' }}</h3>
+        <h3>{{ editingItem ? t('widget_count_edit_title') : t('widget_count_add_title') }}</h3>
         <button v-if="editingItem" class="delete-btn" @click="emit('delete')">
           <i class="ri-delete-bin-line"></i>
         </button>
       </div>
 
       <div class="form-group">
-        <label>Title</label>
+        <label>{{ t('label_title') }}</label>
         <div class="input-wrapper">
           <input v-model="formData.title" placeholder="e.g. Salary Day" class="styled-input" maxlength="12" autofocus />
         </div>
       </div>
 
       <div class="form-group">
-        <label>Target Date</label>
+        <label>{{ t('label_target_date') }}</label>
         <div class="input-wrapper">
           <input type="date" v-model="formData.date" class="styled-input" />
         </div>
       </div>
 
       <div class="form-group">
-        <label>Repeat Cycle</label>
+        <label>{{ t('label_repeat_cycle') }}</label>
         <div class="cycle-selector">
           <div v-for="opt in cycles" :key="opt.value" class="cycle-opt" :class="{ active: formData.recurrence === opt.value }" @click="formData.recurrence = opt.value">
             {{ opt.label }}
@@ -32,27 +32,25 @@
       </div>
 
       <div class="form-group">
-        <label>Background Image</label>
-        <ImagePicker v-model="formData.bgUrl" />
+        <label>{{ t('label_bg_image_url') }}</label> <ImagePicker v-model="formData.bgUrl" />
       </div>
 
       <div class="form-group">
-        <label>Theme Color</label>
-        <ColorSelector v-model="formData.bgColor" />
+        <label>{{ t('label_theme_color') }}</label> <ColorSelector v-model="formData.bgColor" />
       </div>
 
       <div class="modal-footer">
-        <button class="cancel-btn" @click="emit('close')">Cancel</button>
-        <button class="save-btn" @click="handleSave">Save</button>
+        <button class="cancel-btn" @click="emit('close')">{{ t('common_cancel') }}</button> <button class="save-btn" @click="handleSave">{{ t('common_save') }}</button>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-  import { ref, watch } from 'vue'
+  import { ref, watch, computed } from 'vue'
   import ColorSelector from '@/components/ColorSelector.vue'
   import ImagePicker from '@/components/ImagePicker.vue'
+  import { t } from '@/utils/i18n'
 
   const props = defineProps<{
     visible: boolean
@@ -61,12 +59,12 @@
 
   const emit = defineEmits(['close', 'save', 'delete'])
 
-  const cycles = [
-    { label: 'None', value: 'none' },
-    { label: 'Weekly', value: 'weekly' },
-    { label: 'Monthly', value: 'monthly' },
-    { label: 'Yearly', value: 'yearly' },
-  ]
+  const cycles = computed(() => [
+    { label: t('cycle_none'), value: 'none' },
+    { label: t('cycle_weekly'), value: 'weekly' },
+    { label: t('cycle_monthly'), value: 'monthly' },
+    { label: t('cycle_yearly'), value: 'yearly' },
+  ])
 
   const formData = ref({
     title: '',

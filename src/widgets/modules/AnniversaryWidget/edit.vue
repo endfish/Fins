@@ -2,67 +2,61 @@
   <div class="modal-overlay" v-if="visible" @click.self="emit('close')">
     <div class="modal-card">
       <div class="modal-header">
-        <h3>{{ editingItem ? 'Edit Anniversary' : 'Add Anniversary' }}</h3>
+        <h3>{{ editingItem ? t('widget_anniv_edit_title') : t('widget_anniv_add_title') }}</h3>
         <button v-if="editingItem" class="delete-btn" @click="emit('delete')">
           <i class="ri-delete-bin-line"></i>
         </button>
       </div>
 
       <div class="form-group">
-        <label>Title</label>
+        <label>{{ t('label_title') }}</label>
         <div class="input-wrapper">
           <input v-model="formData.title" placeholder="e.g. Project Launch" class="styled-input" maxlength="20" autofocus />
         </div>
       </div>
 
       <div class="form-group">
-        <label>Date</label>
+        <label>{{ t('label_date') }}</label>
         <div class="input-wrapper">
           <input type="date" v-model="formData.date" class="styled-input" />
         </div>
       </div>
 
       <div class="form-group">
-        <label>Card Size</label>
+        <label>{{ t('label_card_size') }}</label>
         <div class="size-selector">
           <div class="size-opt" :class="{ active: formData.size === '3x2' }" @click="formData.size = '3x2'">
             <div class="rect rect-3x2"></div>
-            <span>Standard (3x2)</span>
+            <span>{{ t('size_option_standard') }}</span>
           </div>
 
           <div class="size-opt" :class="{ active: formData.size === '4x2' }" @click="formData.size = '4x2'">
             <div class="rect rect-4x2"></div>
-            <span>Wide (4x2)</span>
+            <span>{{ t('size_option_wide') }}</span>
           </div>
         </div>
       </div>
 
       <div class="form-group">
-        <label>Background Image URL</label>
-        <ImagePicker v-model="formData.bgUrl" />
-        <p class="tip">
-          Select a local preset or enter a direct link. <br>
-          Images are synced as URLs/Paths.
-        </p>
+        <label>{{ t('label_bg_image_url') }}</label> <ImagePicker v-model="formData.bgUrl" />
+        <p class="tip" v-html="t('tip_bg_image_selection')"></p>
       </div>
 
       <div class="form-group">
-        <label>Fallback Color (If no image)</label>
-        <ColorSelector v-model="formData.bgColor" />
+        <label>{{ t('label_fallback_color') }}</label> <ColorSelector v-model="formData.bgColor" />
       </div>
 
       <div class="modal-footer">
-        <button class="cancel-btn" @click="emit('close')">Cancel</button>
-        <button class="save-btn" @click="handleSave">Save</button>
+        <button class="cancel-btn" @click="emit('close')">{{ t('common_cancel') }}</button> <button class="save-btn" @click="handleSave">{{ t('common_save') }}</button>
       </div>
     </div>
   </div>
 </template>
-
 <script setup lang="ts">
   import { ref, watch } from 'vue'
   import ColorSelector from '@/components/ColorSelector.vue'
   import ImagePicker from '@/components/ImagePicker.vue'
+  import { t } from '@/utils/i18n'
 
   const props = defineProps<{
     visible: boolean

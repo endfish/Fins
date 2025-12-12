@@ -2,33 +2,33 @@
   <div class="modal-overlay" v-if="visible" @click.self="emit('close')">
     <div class="modal-card">
       <div class="modal-header">
-        <h3>Add Group</h3>
+        <h3>{{ t('group_add_title') }}</h3>
       </div>
 
       <div class="form-group">
-        <label>Group Name</label>
+        <label>{{ t('group_label_name') }}</label>
         <div class="input-wrapper">
-          <input v-model="formData.name" placeholder="ex: Work" @keydown.enter="handleSave" autofocus class="styled-input" maxlength="10" />
+          <input v-model="formData.name" :placeholder="t('group_placeholder_name')" @keydown.enter="handleSave" autofocus class="styled-input" maxlength="10" />
         </div>
       </div>
 
       <div class="form-group">
-        <label>Select Icon</label>
-        <div class="selected-preview" v-if="formData.icon">Selected: <i :class="formData.icon"></i></div>
+        <label>{{ t('group_label_icon') }}</label>
+        <div class="selected-preview" v-if="formData.icon">{{ t('common_selected') }}: <i :class="formData.icon"></i></div>
         <IconSelector v-model="formData.icon" />
       </div>
 
       <div class="modal-footer">
-        <button class="cancel-btn" @click="emit('close')">Cancel</button>
-        <button class="save-btn" @click="handleSave">Create</button>
+        <button class="cancel-btn" @click="emit('close')">{{ t('common_cancel') }}</button>
+        <button class="save-btn" @click="handleSave">{{ t('common_create') }}</button>
       </div>
     </div>
   </div>
 </template>
-
 <script setup lang="ts">
   import { ref, watch } from 'vue'
   import IconSelector from './IconSelector.vue'
+  import { t } from '@/utils/i18n'
 
   const props = defineProps<{
     visible: boolean
