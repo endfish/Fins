@@ -1,0 +1,233 @@
+{
+  "app_name": {
+    "message": "Fins - Geek New Tab",
+    "description": "The name of the extension"
+  },
+  "app_desc": {
+    "message": "A clean, minimalist new tab extension. Built with Vue 3, Vite, TypeScript.",
+    "description": "Description"
+  },
+  
+  "_comment_common": { "message": "--- Common ---" },
+  "common_confirm": { "message": "Confirm" },
+  "common_cancel": { "message": "Cancel" },
+  "common_save": { "message": "Save" },
+  "common_delete": { "message": "Delete" },
+  "common_edit": { "message": "Edit" },
+  "common_add": { "message": "Add" },
+  "common_back": { "message": "Back" },
+  "common_loading": { "message": "Loading..." },
+
+  "_comment_sidebar": { "message": "--- Sidebar ---" },
+  "group_add_title": { "message": "Add Group" },
+  "group_edit_title": { "message": "Edit Group" },
+  "group_name_label": { "message": "Group Name" },
+  "group_delete_confirm_title": { "message": "Delete Group" },
+  "group_delete_confirm_desc": { 
+    "message": "Are you sure you want to delete \"$NAME$\"? Widgets inside will be removed.",
+    "placeholders": {
+      "NAME": {
+        "content": "$1"
+      }
+    }
+  },
+
+  "_comment_settings": { "message": "--- Settings ---" },
+  "settings_title": { "message": "Settings" },
+  "nav_general": { "message": "General" },
+  "nav_sync": { "message": "Sync" },
+  "nav_about": { "message": "About" },
+
+  "_comment_settings_general": { "message": "--- General Settings ---" },
+  "section_customization": { "message": "Customization" },
+  "label_brand_title": { "message": "Brand Title" },
+  "desc_brand_title": { "message": "Displayed on the main screen." },
+  "section_wallpaper": { "message": "Wallpaper" },
+  "mode_bing": { "message": "Bing Daily" },
+  "mode_custom": { "message": "Custom URL" },
+  "input_custom_bg_placeholder": { "message": "Enter direct image link..." },
+
+  "_comment_settings_sync": { "message": "--- Sync Settings ---" },
+  "sync_section_title": { "message": "Cloud Sync" },
+  "sync_status_enabled": { "message": "Enabled" },
+  "sync_status_disabled": { "message": "Disabled" },
+  "sync_desc": { "message": "Sync data across devices using Google/Microsoft account.<br>Enabled LZ-String compression for max efficiency." },
+  "sync_quota_label": { "message": "Storage Usage" },
+  
+  "sync_section_cloud": { "message": "Cloud Actions" },
+  "sync_btn_upload": { "message": "Upload" },
+  "sync_btn_upload_sub": { "message": "Local ➔ Cloud" },
+  "sync_btn_download": { "message": "Download" },
+  "sync_btn_download_sub": { "message": "Cloud ➔ Local" },
+
+  "sync_section_backup": { "message": "File Backup" },
+  "sync_btn_export": { "message": "Export JSON" },
+  "sync_btn_export_sub": { "message": "Save backup file" },
+  "sync_btn_import": { "message": "Import JSON" },
+  "sync_btn_import_sub": { "message": "Restore from file" },
+
+  "sync_section_danger": { "message": "Danger Zone" },
+  "sync_clear_title": { "message": "Clear Cloud Data" },
+  "sync_clear_desc": { "message": "Permanently remove all data from the cloud server." },
+  "btn_clear": { "message": "Clear" },
+
+  "_comment_store_actions": { "message": "--- Store Feedback ---" },
+  "toast_keep_one_engine": { "message": "Keep at least one engine." },
+  "toast_upload_success": { "message": "Upload Success!" },
+  "toast_upload_failed": { "message": "Upload failed. Data might be too large." },
+  "toast_cloud_empty": { "message": "Cloud storage is empty." },
+  "toast_download_success": { "message": "Download Success!" },
+  "toast_download_failed": { "message": "Download failed." },
+  "toast_cloud_cleared": { "message": "Cloud storage cleared." },
+  "toast_cloud_clear_failed": { "message": "Failed to clear cloud storage." },
+  "toast_import_success": { "message": "Import Success!" },
+  "toast_import_invalid": { "message": "Invalid Fins backup file." },
+  "toast_file_parse_error": { "message": "Failed to parse JSON file." },
+  "toast_old_format": { "message": "Old format detected. Data structure might vary." },
+
+  "confirm_upload_title": { "message": "Overwrite Cloud Data?" },
+  "confirm_upload_content": { "message": "Overwrite cloud data with local data?" },
+  "confirm_download_title": { "message": "Overwrite Local Data?" },
+  "confirm_download_content": { "message": "Overwrite local data with cloud data? This is irreversible." },
+  "confirm_clear_cloud_title": { "message": "Clear Cloud Data?" },
+  "confirm_clear_cloud_content": { "message": "Permanently delete cloud backup?" },
+  "confirm_restore_title": { "message": "Restore Data?" },
+  "confirm_restore_content": { "message": "Restore from file? Current data will be overwritten." },
+
+  "_comment_search": { "message": "--- Search Bar ---" },
+  "search_placeholder": { 
+    "message": "Search with $ENGINE$...",
+    "placeholders": {
+      "ENGINE": {
+        "content": "$1"
+      }
+    }
+  },
+  "search_switch_tooltip": { "message": "Left-click: Switch | Right-click: Settings" },
+  "search_engines_title": { "message": "Search Engines" },
+  "label_name": { "message": "Name" },
+  "label_url_prefix": { "message": "URL Prefix" },
+  "label_icon": { "message": "Icon" },
+  "placeholder_engine_name": { "message": "ex: Google" },
+  "placeholder_engine_url": { "message": "https://google.com/search?q=" },
+  "tip_engine_query": { "message": "Query will be appended to the end." },
+  "text_selected": { "message": "Selected" },
+  "btn_save_engine": { "message": "Save Engine" },
+
+  "_comment_context_menu": { "message": "--- Context Menu ---" },
+  "ctx_add_link": { "message": "Add Link" },
+  "ctx_add_widget": { "message": "Add Widget" },
+
+  "_comment_widget_gallery": { "message": "--- Widget Gallery ---" },
+  "gallery_title": { "message": "Add Widget" },
+  "widget_name_hito": { "message": "Hitokoto" },
+  "widget_desc_hito": { "message": "Daily quote / Custom text" },
+  "widget_name_anniv": { "message": "Days Matter" },
+  "widget_desc_anniv": { "message": "Track important dates" },
+  "widget_name_count": { "message": "Countdown" },
+  "widget_desc_count": { "message": "Recurring events" },
+
+  "_comment_widget_link": { "message": "--- Widget: Link ---" },
+  "widget_link_add_title": { "message": "Add Widget" },
+  "widget_link_edit_title": { "message": "Edit Widget" },
+  "label_url": { "message": "URL" },
+  "label_title": { "message": "Title" },
+  "label_icon_style": { "message": "Icon Style" },
+  "option_auto": { "message": "AUTO" },
+  "link_auto_fetch_main": { "message": "Auto-fetch via Google Services" },
+  "link_auto_fetch_sub": { "message": "If the icon fails to load, please switch to Remix or Text mode." },
+  "label_select_icon": { "message": "Select Icon" },
+  "label_short_text": { "message": "Short Text (Max 2)" },
+  "label_bg_color": { "message": "Background Color" },
+
+  "_comment_widget_hito": { "message": "--- Widget: Hitokoto ---" },
+  "widget_hito_edit_title": { "message": "Edit Hitokoto" },
+  "label_custom_text": { "message": "Custom Text" },
+  "placeholder_custom_text": { "message": "Leave empty to use random quote..." },
+  "desc_custom_text": { "message": "If set, this text will replace the daily quote." },
+
+  "_comment_widget_anniv": { "message": "--- Widget: Anniversary ---" },
+  "widget_anniv_add_title": { "message": "Add Anniversary" },
+  "widget_anniv_edit_title": { "message": "Edit Anniversary" },
+  "label_date": { "message": "Date" },
+  "label_card_size": { "message": "Card Size" },
+  "size_option_standard": { "message": "Standard (3x2)" },
+  "size_option_wide": { "message": "Wide (4x2)" },
+  "label_bg_image_url": { "message": "Background Image URL" },
+  "tip_bg_image_selection": { "message": "Select a local preset or enter a direct link.<br>Images are synced as URLs/Paths." },
+  "label_fallback_color": { "message": "Fallback Color (If no image)" },
+  "anniversary_days_since": { "message": "Days Since" },
+  "anniversary_days_left": { "message": "Days Left" },
+
+  "_comment_widget_count": { "message": "--- Widget: Countdown ---" },
+  "widget_count_add_title": { "message": "Add Countdown" },
+  "widget_count_edit_title": { "message": "Edit Countdown" },
+  "label_target_date": { "message": "Target Date" },
+  "label_repeat_cycle": { "message": "Repeat Cycle" },
+  "cycle_none": { "message": "None" },
+  "cycle_weekly": { "message": "Weekly" },
+  "cycle_monthly": { "message": "Monthly" },
+  "cycle_yearly": { "message": "Yearly" },
+  "label_theme_color": { "message": "Theme Color" },
+  "countdown_days_left": { "message": "Days Left" },
+
+  "_comment_components": { "message": "--- Common Components ---" },
+  "common_create": { "message": "Create" },
+  "common_selected": { "message": "Selected" },
+  
+  "_comment_group_modal": { "message": "--- Group Modal ---" },
+  "group_label_name": { "message": "Group Name" },
+  "group_placeholder_name": { "message": "ex: Work" },
+  "group_label_icon": { "message": "Select Icon" },
+
+  "_comment_icon_selector": { "message": "--- Icon Selector ---" },
+  "icon_search_placeholder": { "message": "Search 2000+ icons..." },
+  "icon_tab_all": { "message": "All" },
+  "icon_tab_line": { "message": "Line" },
+  "icon_tab_fill": { "message": "Fill" },
+  "icon_not_found": { "message": "No icons found." },
+  "icon_loading": { "message": "Loading..." },
+  "icon_loaded_count": { 
+    "message": "$COUNT$ icons loaded.",
+    "placeholders": {
+      "COUNT": { "content": "$1" }
+    }
+  },
+
+  "_comment_smart_grid": { "message": "--- Smart Grid ---" },
+  "confirm_delete_widget_title": { "message": "Delete Widget" },
+  "confirm_delete_widget_content": { "message": "Are you sure you want to remove this widget?" },
+  "confirm_remove_widget_content": { "message": "Remove this widget directly?" },
+  "common_remove": { "message": "Remove" },
+  "toast_widget_updated": { "message": "Widget updated" },
+  "toast_widget_added": { "message": "Widget added" },
+  "toast_unknown_widget_type": { 
+    "message": "Unknown widget type: $TYPE$",
+    "placeholders": {
+        "TYPE": { "content": "$1" }
+    }
+  },
+
+  "_comment_image_picker": { "message": "--- Image Picker ---" },
+  "img_input_placeholder": { "message": "Select image or paste URL..." },
+  "img_btn_tooltip": { "message": "Select from Local Gallery" },
+  "img_modal_title": { "message": "Local Wallpapers" },
+  "img_empty_tip": { "message": "No images found in src/assets/wallpapers" },
+  "img_loading_more": { "message": "Loading more..." },
+  "img_storage_tip": { "message": "Storage optimized: Saving filename only." },
+
+  "_comment_color_selector": { "message": "--- Color Selector ---" },
+  "color_btn_custom": { "message": "Custom Color" },
+  "color_preset_glass": { "message": "Glass" },
+  "color_preset_dark": { "message": "Dark" },
+  "color_preset_red": { "message": "Red" },
+  "color_preset_orange": { "message": "Orange" },
+  "color_preset_yellow": { "message": "Yellow" },
+  "color_preset_green": { "message": "Green" },
+  "color_preset_teal": { "message": "Teal" },
+  "color_preset_blue": { "message": "Blue" },
+  "color_preset_indigo": { "message": "Indigo" },
+  "color_preset_purple": { "message": "Purple" },
+  "color_preset_pink": { "message": "Pink" },
+  "color_preset_slate": { "message": "Slate" }
+}
